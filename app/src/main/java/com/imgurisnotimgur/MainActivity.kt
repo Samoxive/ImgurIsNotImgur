@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val s = getSharedPreferences("preferences", Context.MODE_PRIVATE).getString("refreshToken", null);
+        val s = getSharedPreferences("secret", Context.MODE_PRIVATE).getString("refreshToken", null)
 
         if (s == null) {
             val intent = Intent(this@MainActivity, NoAuthActivity::class.java)
