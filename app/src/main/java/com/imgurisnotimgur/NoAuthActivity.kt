@@ -15,6 +15,7 @@ class NoAuthActivity : AppCompatActivity() {
         authButton.setOnClickListener {
             val intent = Intent(this@NoAuthActivity, AuthenticationActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
 
