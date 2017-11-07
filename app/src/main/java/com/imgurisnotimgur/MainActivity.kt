@@ -27,17 +27,15 @@ class MainActivity : AppCompatActivity() {
         if (accessToken == null) {
             val intent = Intent(this@MainActivity, NoAuthActivity::class.java)
             startActivity(intent)
-        } else {
-            startActivity(intent)}
-
-        else {
+        }  else {
             val gridLayoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
             rv_gallery.layoutManager = gridLayoutManager
             val galleryAdapter = GalleryAdapter(9, itemgibicekpanpa)
-            rv_gallery.adapter = galleryAdapter}
-
-            AsyncAction<Unit, Unit>({ Thread.sleep(3000) }, { test.text = "OI MATE LUL\n" + accessToken }).execute(Unit)
-            AsyncAction<String, String>(
+            rv_gallery.adapter = galleryAdapter
+        }
+        AsyncAction<Unit, Unit>({ Thread.sleep(3000) }, { //test.text = "OI MATE LUL\n" + accessToken
+        }).execute(Unit) // dude I removed text thing while you push that code, sorry. But good news is I added 3x3 gallery thing \o/
+        AsyncAction<String, String>(
                     { url ->
                         Thread.sleep(3000)
                         val request = Request.Builder()
@@ -52,9 +50,8 @@ class MainActivity : AppCompatActivity() {
                         val username = lastImage["account_url"] as String
                         val link = lastImage["link"] as String
 
-                        test.text = (String.format("Logged in as: %s\nLast Image: %s", username, link))
+                        //test.text = (String.format("Logged in as: %s\nLast Image: %s", username, link))
                     }
             ).execute("https://api.imgur.com/3/account/me/images")
-        }
     }
 }
