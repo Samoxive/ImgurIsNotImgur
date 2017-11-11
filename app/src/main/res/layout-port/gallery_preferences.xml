@@ -9,6 +9,7 @@
         android:id="@+id/sectionSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         android:layout_weight="1"
         android:entries="@array/section" />
 
@@ -16,6 +17,7 @@
         android:id="@+id/sortSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         android:layout_weight="1"
         android:entries="@array/sort"/>
 </LinearLayout>
