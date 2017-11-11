@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.imgurisnotimgur.GalleryActivity" >
+
+    <include
+        android:id="@+id/includePrefs"
+        layout="@layout/gallery_preferences"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/gallery_preferences_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--
+    The attribute "app:layout_constraintHeight_default" coupled with "layout_height="0dp"
+    is needed to adjust recyclerView's height based on the other elements
+    -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/includeNavBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="wrap"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/includePrefs"
+        app:spanCount="3" />
+
+    <include
+        android:id="@+id/includeNavBar"
+        layout="@layout/navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/navigation_bar_height"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>
+
