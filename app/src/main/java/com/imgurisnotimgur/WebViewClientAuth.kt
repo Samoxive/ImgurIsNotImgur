@@ -1,6 +1,7 @@
 package com.imgurisnotimgur
 
 import android.content.Context
+import android.content.Intent
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.imgurisnotimgur.exceptions.OauthFailedException
@@ -33,6 +34,9 @@ class WebViewClientAuth(private val context: Context,
             prefEdit.putString("accountId", parameters.accountId)
             prefEdit.putString("accountUsername", parameters.accountUsername)
             prefEdit.commit()
+
+            val intent = Intent(activity, MainActivity::class.java)
+            activity.startActivity(intent)
             activity.finish()
         }
     }
