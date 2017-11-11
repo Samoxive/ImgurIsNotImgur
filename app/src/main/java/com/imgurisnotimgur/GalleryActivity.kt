@@ -16,6 +16,7 @@ class GalleryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_gallery)
 
         galleryAct.isEnabled = false
+        subredditAct.setOnClickListener(NavBarButtonHandler(this, SubredditActivity::class.java))
         val galleryAdapter = GalleryAdapter(itemgibicekpanpa)
         rv_gallery.adapter = galleryAdapter
         sectionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
