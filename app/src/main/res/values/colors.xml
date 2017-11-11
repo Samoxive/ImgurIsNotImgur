@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2B2B2B</color>
-    <color name="colorPrimaryDark">#181817</color>
-    <color name="colorAccent">#85BF25</color>
+    <!--#181817-->
+
+    <color name="colorPrimary">#85BF25</color>
+    <color name="colorPrimaryDark">#38491B</color>
+    <color name="colorAccent">#2B2B2B</color>
     <color name="colorUpvote">#85BF25</color>
     <color name="colorUpovotePB">#38491B</color>
     <color name="colorDownvote">#EE4444</color>
