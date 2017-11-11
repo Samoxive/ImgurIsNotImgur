@@ -4,18 +4,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 
-/**
- * Created by ozankaraali on 10.10.2017.
- */
-
 class GalleryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-    internal var listItemGalleryView: ImageView
+    private var listItemGalleryView = itemView.findViewById<ImageView>(R.id.imageView)
 
-    init {
-        listItemGalleryView = itemView.findViewById<View>(R.id.imageView) as ImageView
-    }
-
-    internal fun bind(s: Int) {
+    fun bind(s: Int) {
         listItemGalleryView.setImageResource(s)
     }
 
