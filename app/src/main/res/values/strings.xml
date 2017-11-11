@@ -3,4 +3,22 @@
     <string name="authenticate">Authenticate</string>
     <string name="title_activity_authentication">AuthenticationActivity</string>
     <string name="please_sign_in">Please sign in through Imgur</string>
+    <string name="subreddit_act">Subreddit</string>
+    <string name="gallery_act">Gallery</string>
+    <string name="upload_act">Upload</string>
+    <string name="search_act">Search</string>
+    <string-array name="section">
+        <item>Hot</item>
+        <item>Top</item>
+        <item>User</item>
+    </string-array>
+    <string-array name="sort">
+        <item>Viral</item>
+        <item>Time</item>
+        <item>Top (today)</item>
+        <item>Top (this week)</item>
+        <item>Top (this month)</item>
+        <item>Top (this year)</item>
+        <item>Top (all time)</item>
+    </string-array>
 </resources>
