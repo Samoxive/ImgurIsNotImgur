@@ -17,7 +17,5 @@ class NoAuthActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
-
     }
 }
