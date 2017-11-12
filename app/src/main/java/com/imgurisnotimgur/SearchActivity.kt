@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.AdapterView
-import kotlinx.android.synthetic.main.activity_subreddit.*
+import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.gallery_preferences.*
 import kotlinx.android.synthetic.main.navigation_bar.*
 
@@ -20,7 +20,7 @@ class SearchActivity : AppCompatActivity() {
         uploadAct.setOnClickListener(NavBarButtonHandler(this, UploadActivity::class.java))
         subredditAct.setOnClickListener(NavBarButtonHandler(this, SubredditActivity::class.java))
 
-        val galleryAdapter = GalleryAdapter(itemgibicekpanpa)
+        val galleryAdapter = GalleryAdapter(intArrayOf())
         rv_gallery.adapter = galleryAdapter
         sectionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -40,6 +40,11 @@ class SearchActivity : AppCompatActivity() {
                 val selectedItem = parent!!.getItemAtPosition(position) as String
             }
         }
+
+        searchButton.setOnClickListener {
+            galleryAdapter.items = itemgibicekpanpa
+        }
+
     }
 
 }
