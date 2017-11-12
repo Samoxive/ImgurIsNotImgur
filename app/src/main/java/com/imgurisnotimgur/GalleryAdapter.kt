@@ -4,7 +4,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
-class GalleryAdapter(private val items: IntArray) : RecyclerView.Adapter<GalleryViewHolder>() {
+class GalleryAdapter(items: IntArray) : RecyclerView.Adapter<GalleryViewHolder>() {
+    var items: IntArray = items
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder {
         val inflater = LayoutInflater.from(parent.context)
