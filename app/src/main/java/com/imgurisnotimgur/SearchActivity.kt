@@ -43,6 +43,8 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
+        searchInput.setOnClickListener { searchInput.isIconified = false }
+
         searchInput.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 galleryAdapter.items = itemgibicekpanpa
