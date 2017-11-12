@@ -22,7 +22,9 @@
         <activity android:name=".AuthenticationActivity" />
         <activity android:name=".GalleryActivity" />
         <activity android:name=".SubredditActivity" />
-        <activity android:name=".UploadActivity"></activity>
+        <activity android:name=".UploadActivity" />
+        <activity android:name=".SearchActivity" />
+
     </application>
 
 </manifest>

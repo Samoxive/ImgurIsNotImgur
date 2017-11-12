@@ -6,6 +6,7 @@
     <string name="subreddit_act">Subreddit</string>
     <string name="subreddit_placeholder">/r/Subreddit</string>
     <string name="subreddit_go">GO!</string>
+    <string name="search_placeholder">Search</string>
     <string name="gallery_act">Gallery</string>
     <string name="upload_act">Upload</string>
     <string name="upload_photo_label">Upload a photo!</string>

@@ -19,6 +19,7 @@ class SubredditActivity : AppCompatActivity() {
         subredditAct.isEnabled = false
         galleryAct.setOnClickListener(NavBarButtonHandler(this, GalleryActivity::class.java))
         uploadAct.setOnClickListener(NavBarButtonHandler(this, UploadActivity::class.java))
+        searchAct.setOnClickListener(NavBarButtonHandler(this, SearchActivity::class.java))
 
         val galleryAdapter = GalleryAdapter(itemgibicekpanpa)
         rv_gallery.adapter = galleryAdapter

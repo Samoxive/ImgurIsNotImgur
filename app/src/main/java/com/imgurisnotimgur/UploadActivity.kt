@@ -14,6 +14,7 @@ class UploadActivity : AppCompatActivity() {
         uploadAct.isEnabled = false
         subredditAct.setOnClickListener(NavBarButtonHandler(this, SubredditActivity::class.java))
         galleryAct.setOnClickListener(NavBarButtonHandler(this, GalleryActivity::class.java))
+        searchAct.setOnClickListener(NavBarButtonHandler(this, SearchActivity::class.java))
 
         cameraUpload.setOnClickListener {
             // do camera stuff
