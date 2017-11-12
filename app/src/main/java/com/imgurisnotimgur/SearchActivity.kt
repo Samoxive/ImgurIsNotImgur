@@ -2,8 +2,10 @@ package com.imgurisnotimgur
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.SearchView
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.gallery_preferences.*
 import kotlinx.android.synthetic.main.navigation_bar.*
@@ -41,9 +43,17 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
-        searchButton.setOnClickListener {
-            galleryAdapter.items = itemgibicekpanpa
-        }
+        searchInput.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                galleryAdapter.items = itemgibicekpanpa
+                rv_gallery.requestFocus()
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
 
     }
 
