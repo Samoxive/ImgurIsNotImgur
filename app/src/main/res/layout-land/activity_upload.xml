@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        android:id="@+id/includeNavBar"
+        layout="@layout/navigation_bar"
+        android:layout_width="@dimen/navigation_bar_width"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/upload_photo_label"
+        android:textColor="@color/colorAccent"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toStartOf="@+id/includeNavBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/pickUpload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
+        android:drawableBottom="@drawable/ic_camera_roll_black_24dp"
+        android:drawablePadding="8dp"
+        android:paddingBottom="36dp"
+        android:paddingTop="36dp"
+        android:text="@string/upload_from_photo_roll"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/cameraUpload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        android:drawableBottom="@drawable/ic_photo_camera_black_24dp"
+        android:drawablePadding="8dp"
+        android:paddingBottom="36dp"
+        android:paddingTop="36dp"
+        android:text="@string/upload_from_new_photo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/includeNavBar"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+</android.support.constraint.ConstraintLayout>
