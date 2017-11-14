@@ -1,9 +1,5 @@
 package com.imgurisnotimgur
 
-/**
- * Created by ozankaraali on 13.11.2017.
- */
-
 import android.os.Bundle
 import android.preference.ListPreference
 import android.preference.Preference
