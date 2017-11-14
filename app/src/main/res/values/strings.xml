@@ -28,4 +28,6 @@
         <item>Top (all time)</item>
     </string-array>
     <string name="title_activity_subreddit">SubredditActivity</string>
+    <string name="settings">Settings</string>
+    <string name="quit">Quit</string>
 </resources>
