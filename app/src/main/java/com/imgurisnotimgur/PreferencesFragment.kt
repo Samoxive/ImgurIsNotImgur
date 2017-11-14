@@ -18,19 +18,19 @@ class PreferencesFragment : PreferenceFragment(), Preference.OnPreferenceChangeL
 
         addPreferencesFromResource(R.xml.pref_general)
 
-        val locationPreference = findPreference("location")
-        val unitPreference = findPreference("units")
+        val globalPreferences = PreferenceManager.getDefaultSharedPreferences(activity.applicationContext)
 
-        locationPreference.onPreferenceChangeListener = this
-        unitPreference.onPreferenceChangeListener = this
+        val sectionPreference = findPreference("section")
+        val sortPreference = findPreference("sort")
+        val subredditNamePreference = findPreference("subreddit")
 
-        val loc_prefs = PreferenceManager
-                .getDefaultSharedPreferences(this.activity.applicationContext)
-        onPreferenceChange(locationPreference, loc_prefs.getString(locationPreference.key, ""))
+        sectionPreference.onPreferenceChangeListener = this
+        sortPreference.onPreferenceChangeListener = this
+        subredditNamePreference.onPreferenceChangeListener = this
 
-        val unit_prefs = PreferenceManager
-                .getDefaultSharedPreferences(this.activity.applicationContext)
-        onPreferenceChange(unitPreference, unit_prefs.getString(unitPreference.key, ""))
+        onPreferenceChange(sectionPreference, globalPreferences.getString(sectionPreference.key, ""))
+        onPreferenceChange(sortPreference, globalPreferences.getString(sortPreference.key, ""))
+        onPreferenceChange(subredditNamePreference, globalPreferences.getString(subredditNamePreference.key, ""))
     }
 
     override fun onPreferenceChange(preference: Preference, value: Any?): Boolean {
