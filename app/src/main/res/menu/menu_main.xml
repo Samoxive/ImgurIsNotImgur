@@ -5,7 +5,7 @@
     tools:context=".SubredditActivity">
 
     <item
-        android:id="@+id/action_refresh"
+        android:id="@+id/settingsButton"
         android:orderInCategory="100"
         android:title="Settings"
         app:showAsAction="never" />
