@@ -15,7 +15,15 @@ import kotlinx.android.synthetic.main.gallery_preferences.*
 import kotlinx.android.synthetic.main.navigation_bar.*
 
 class SearchActivity : AppCompatActivity() {
-    val itemgibicekpanpa = intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    val itemgibicekpanpa = intArrayOf(
+            R.drawable.cat1,
+            R.drawable.cat2,
+            R.drawable.cat3,
+            R.drawable.cat4,
+            R.drawable.cat5,
+            R.drawable.cat6,
+            R.drawable.cat7
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +44,7 @@ class SearchActivity : AppCompatActivity() {
         sectionSpinner.setSelection(sectionIndex, true)
         sortSpinner.setSelection(sortIndex, true)
 
-        val galleryAdapter = GalleryAdapter(intArrayOf())
+        val galleryAdapter = GalleryAdapter(intArrayOf(), this)
         rv_gallery.adapter = galleryAdapter
         sectionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {

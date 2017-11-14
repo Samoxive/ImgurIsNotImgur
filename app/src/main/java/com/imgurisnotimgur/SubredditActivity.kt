@@ -15,7 +15,15 @@ import kotlinx.android.synthetic.main.gallery_preferences.*
 import kotlinx.android.synthetic.main.navigation_bar.*
 
 class SubredditActivity : AppCompatActivity() {
-    val itemgibicekpanpa = intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    val itemgibicekpanpa = intArrayOf(
+            R.drawable.cat1,
+            R.drawable.cat2,
+            R.drawable.cat3,
+            R.drawable.cat4,
+            R.drawable.cat5,
+            R.drawable.cat6,
+            R.drawable.cat7
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +46,7 @@ class SubredditActivity : AppCompatActivity() {
         sortSpinner.setSelection(sortIndex, true)
         subredditInput.setText(subredditPreference, TextView.BufferType.EDITABLE)
 
-        val galleryAdapter = GalleryAdapter(itemgibicekpanpa)
+        val galleryAdapter = GalleryAdapter(itemgibicekpanpa, this)
         rv_gallery.adapter = galleryAdapter
         sectionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
