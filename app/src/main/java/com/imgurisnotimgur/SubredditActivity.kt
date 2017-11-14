@@ -73,6 +73,7 @@ class SubredditActivity : AppCompatActivity() {
                 val intent = Intent(this, PreferencesActivity::class.java)
                 startActivity(intent)
             }
+            R.id.quitButton -> System.exit(0)
         }
 
         return super.onOptionsItemSelected(item)

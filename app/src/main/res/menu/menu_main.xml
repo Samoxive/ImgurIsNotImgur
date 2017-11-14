@@ -7,7 +7,12 @@
     <item
         android:id="@+id/settingsButton"
         android:orderInCategory="100"
-        android:title="Settings"
+        android:title="@string/settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/quitButton"
+        android:orderInCategory="101"
+        android:title="@string/quit" />
+
 
 </menu>
