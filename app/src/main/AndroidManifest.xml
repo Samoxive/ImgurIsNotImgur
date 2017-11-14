@@ -24,6 +24,7 @@
         <activity android:name=".SubredditActivity" />
         <activity android:name=".UploadActivity" />
         <activity android:name=".SearchActivity" />
+        <activity android:name=".PreferencesActivity" />
 
     </application>
 
