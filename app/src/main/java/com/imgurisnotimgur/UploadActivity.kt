@@ -1,8 +1,13 @@
 package com.imgurisnotimgur
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
+import android.view.Menu
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_upload.*
+import kotlinx.android.synthetic.main.gallery_preferences.*
 import kotlinx.android.synthetic.main.navigation_bar.*
 
 class UploadActivity : AppCompatActivity() {
@@ -23,5 +28,21 @@ class UploadActivity : AppCompatActivity() {
         pickUpload.setOnClickListener {
             // do gallery stuff
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item!!.itemId) {
+            R.id.settingsButton -> {
+                val intent = Intent(this, PreferencesActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }
