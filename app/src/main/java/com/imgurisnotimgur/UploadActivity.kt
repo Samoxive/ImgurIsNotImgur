@@ -11,6 +11,8 @@ import kotlinx.android.synthetic.main.gallery_preferences.*
 import kotlinx.android.synthetic.main.navigation_bar.*
 
 class UploadActivity : AppCompatActivity() {
+    private val GALLERY_RESULT = 0
+    private val CAMERA_RESULT = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,11 +24,15 @@ class UploadActivity : AppCompatActivity() {
         searchAct.setOnClickListener(NavBarButtonHandler(this, SearchActivity::class.java))
 
         cameraUpload.setOnClickListener {
-            // do camera stuff
+            val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(cameraIntent, CAMERA_RESULT)
         }
 
         pickUpload.setOnClickListener {
-            // do gallery stuff
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_RESULT)
         }
     }
 
