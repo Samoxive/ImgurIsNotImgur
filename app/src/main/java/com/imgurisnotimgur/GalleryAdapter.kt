@@ -28,11 +28,26 @@ class GalleryAdapter(items: IntArray, val activity: Activity) : RecyclerView.Ada
         // x * y * 4 bytes of memory, which is around 8 mb for an hd image. So we downscaled
         // images here for a smoother experience for the user
         val original = BitmapFactory.decodeResource(activity.resources, items[position])
-        val scaled = Bitmap.createScaledBitmap(original, original.width / 2, original.height / 2, false)
+
+        // Horrible, horrible hack. I investigated ways to fetch the imageview's dimensions
+        // but all of them involve listening to changes in runtime, which makes implementation difficult
+        // In the future, REPLACE this ungodly mess.
+        val width = 600
+        val scaleFactor = width.toFloat() / original.width.toFloat()
+        val height = (scaleFactor * original.height.toFloat()).toInt()
+        val scaled = Bitmap.createScaledBitmap(original, width, height, true)
         holder.bind(scaled)
     }
 
     override fun getItemCount(): Int {
         return items.size
+    }
+
+    fun getScreenWidth(): Int {
+        return Resources.getSystem().displayMetrics.widthPixels
+    }
+
+    fun getScreenHeight(): Int {
+        return Resources.getSystem().displayMetrics.heightPixels
     }
 }
