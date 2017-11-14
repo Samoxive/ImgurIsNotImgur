@@ -2,25 +2,25 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ListPreference
-        android:defaultValue="1"
+        android:defaultValue="Top"
         android:entries="@array/section"
         android:entryValues="@array/section"
-        android:key="list_preference_1"
+        android:key="section"
         android:title="Default Section" />
     <ListPreference
-        android:defaultValue="1"
+        android:defaultValue="Viral"
         android:entries="@array/sort"
         android:entryValues="@array/sort"
-        android:key="list_preference_2"
+        android:key="sort"
         android:title="Default Sorting" />
     <EditTextPreference
-        android:defaultValue="Default value"
-        android:key="edit_text_preference_1"
+        android:defaultValue="/r/CatsStandingUp"
+        android:key="subreddit"
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:title="Default Subreddit" />
     <SwitchPreference
         android:defaultValue="false"
-        android:key="switch_preference_1"
+        android:key="nsfw_enabled"
         android:title="NSFW Content (?)" />
 </PreferenceScreen>
