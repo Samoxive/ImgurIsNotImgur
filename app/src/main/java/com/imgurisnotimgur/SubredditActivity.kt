@@ -68,8 +68,12 @@ class SubredditActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        val intent = Intent(this, PreferencesActivity::class.java)
-        startActivity(intent)
+        when (item!!.itemId) {
+            R.id.settingsButton -> {
+                val intent = Intent(this, PreferencesActivity::class.java)
+                startActivity(intent)
+            }
+        }
 
         return super.onOptionsItemSelected(item)
     }
