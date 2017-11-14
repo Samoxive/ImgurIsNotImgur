@@ -42,12 +42,4 @@ class GalleryAdapter(items: IntArray, val activity: Activity) : RecyclerView.Ada
     override fun getItemCount(): Int {
         return items.size
     }
-
-    fun getScreenWidth(): Int {
-        return Resources.getSystem().displayMetrics.widthPixels
-    }
-
-    fun getScreenHeight(): Int {
-        return Resources.getSystem().displayMetrics.heightPixels
-    }
 }
