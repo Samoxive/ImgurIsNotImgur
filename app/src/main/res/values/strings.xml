@@ -9,6 +9,7 @@
     <string name="search_placeholder">Search</string>
     <string name="gallery_act">Gallery</string>
     <string name="upload_act">Upload</string>
+    <string name="profile_act">Profile</string>
     <string name="upload_photo_label">Upload a photo!</string>
     <string name="upload_from_photo_roll">Pick from gallery</string>
     <string name="upload_from_new_photo">Take a new photo</string>
