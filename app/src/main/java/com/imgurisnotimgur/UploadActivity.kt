@@ -22,6 +22,7 @@ class UploadActivity : AppCompatActivity() {
         subredditAct.setOnClickListener(NavBarButtonHandler(this, SubredditActivity::class.java))
         galleryAct.setOnClickListener(NavBarButtonHandler(this, GalleryActivity::class.java))
         searchAct.setOnClickListener(NavBarButtonHandler(this, SearchActivity::class.java))
+        profileAct.setOnClickListener(NavBarButtonHandler(this, ProfileActivity::class.java))
 
         cameraUpload.setOnClickListener {
             val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)

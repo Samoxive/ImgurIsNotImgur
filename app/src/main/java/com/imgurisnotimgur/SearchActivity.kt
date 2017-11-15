@@ -33,6 +33,7 @@ class SearchActivity : AppCompatActivity() {
         galleryAct.setOnClickListener(NavBarButtonHandler(this, GalleryActivity::class.java))
         uploadAct.setOnClickListener(NavBarButtonHandler(this, UploadActivity::class.java))
         subredditAct.setOnClickListener(NavBarButtonHandler(this, SubredditActivity::class.java))
+        profileAct.setOnClickListener(NavBarButtonHandler(this, ProfileActivity::class.java))
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         val sortPreference = preferences.getString("sort", "Hot")

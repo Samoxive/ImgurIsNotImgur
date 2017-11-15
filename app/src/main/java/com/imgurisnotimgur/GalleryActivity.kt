@@ -31,6 +31,7 @@ class GalleryActivity : AppCompatActivity() {
         subredditAct.setOnClickListener(NavBarButtonHandler(this, SubredditActivity::class.java))
         uploadAct.setOnClickListener(NavBarButtonHandler(this, UploadActivity::class.java))
         searchAct.setOnClickListener(NavBarButtonHandler(this, SearchActivity::class.java))
+        profileAct.setOnClickListener(NavBarButtonHandler(this, ProfileActivity::class.java))
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         val sortPreference = preferences.getString("sort", "Hot")
