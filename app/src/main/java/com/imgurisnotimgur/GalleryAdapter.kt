@@ -1,7 +1,7 @@
 package com.imgurisnotimgur
 
 import android.app.Activity
-import android.content.res.Resources
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.support.v7.widget.RecyclerView
@@ -18,7 +18,7 @@ class GalleryAdapter(items: IntArray, val activity: Activity) : RecyclerView.Ada
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.gallery_list_item, parent, false)
-        return GalleryViewHolder(view)
+        return GalleryViewHolder(view, this)
         //TODO(ozan): ADD LISTENER ATTACHED with return GVH(v).onClick fun
     }
 
@@ -41,5 +41,11 @@ class GalleryAdapter(items: IntArray, val activity: Activity) : RecyclerView.Ada
 
     override fun getItemCount(): Int {
         return items.size
+    }
+
+    fun onItemClick(position: Int) {
+        val intent = Intent(activity, ImageDetailActivity::class.java)
+        intent.putExtra("imageResId", items[position])
+        activity.startActivity(intent)
     }
 }
