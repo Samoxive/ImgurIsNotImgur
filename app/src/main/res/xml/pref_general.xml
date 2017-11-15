@@ -6,21 +6,21 @@
         android:entries="@array/section"
         android:entryValues="@array/section"
         android:key="section"
-        android:title="Default Section" />
+        android:title="@string/def_section" />
     <ListPreference
         android:defaultValue="Viral"
         android:entries="@array/sort"
         android:entryValues="@array/sort"
         android:key="sort"
-        android:title="Default Sorting" />
+        android:title="@string/def_sorting" />
     <EditTextPreference
         android:defaultValue="/r/CatsStandingUp"
         android:key="subreddit"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="Default Subreddit" />
+        android:title="@string/def_subreddit" />
     <SwitchPreference
         android:defaultValue="false"
         android:key="nsfw_enabled"
-        android:title="NSFW Content (?)" />
+        android:title="@string/def_nsfw" />
 </PreferenceScreen>
