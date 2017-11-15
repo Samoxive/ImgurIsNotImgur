@@ -3,6 +3,7 @@ package com.imgurisnotimgur
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.content.res.ResourcesCompat
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -15,6 +16,11 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
 
         profileAct.isEnabled = false
+        subredditAct.setTypeface(ResourcesCompat.getFont(this.applicationContext, R.font.fontawesome))
+        uploadAct.setTypeface(ResourcesCompat.getFont(this.applicationContext, R.font.fontawesome))
+        searchAct.setTypeface(ResourcesCompat.getFont(this.applicationContext, R.font.fontawesome))
+        profileAct.setTypeface(ResourcesCompat.getFont(this.applicationContext, R.font.fontawesome))
+        galleryAct.setTypeface(ResourcesCompat.getFont(this.applicationContext, R.font.fontawesome))
         subredditAct.setOnClickListener(NavBarButtonHandler(this, SubredditActivity::class.java))
         galleryAct.setOnClickListener(NavBarButtonHandler(this, GalleryActivity::class.java))
         searchAct.setOnClickListener(NavBarButtonHandler(this, SearchActivity::class.java))
