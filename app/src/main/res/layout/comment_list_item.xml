@@ -54,7 +54,6 @@
                 android:layout_marginTop="8dp"
                 android:text=""
                 android:textColor="@color/colorAccent"
-                android:inputType="textMultiLine"
                 android:scrollHorizontally="false"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/commentAuthor" />
@@ -65,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="32dp"
                 android:text="322 Points"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
