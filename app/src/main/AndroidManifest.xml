@@ -25,7 +25,8 @@
         <activity android:name=".UploadActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".PreferencesActivity" />
-
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".ImageDetailActivity" />
     </application>
 
 </manifest>
