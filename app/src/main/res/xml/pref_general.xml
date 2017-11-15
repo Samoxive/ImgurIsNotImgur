@@ -6,7 +6,7 @@
         android:entries="@array/section"
         android:entryValues="@array/section"
         android:key="section"
-        android:title="@string/def_selection" />
+        android:title="@string/def_section" />
     <ListPreference
         android:defaultValue="Viral"
         android:entries="@array/sort"

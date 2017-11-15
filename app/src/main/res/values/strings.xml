@@ -14,7 +14,7 @@
     <string name="upload_from_photo_roll">Pick from gallery</string>
     <string name="upload_from_new_photo">Take a new photo</string>
     <string name="search_act">Search</string>
-    <string name="def_selection">Default Selection</string>
+    <string name="def_section">Default Section</string>
     <string name="def_sorting">Default Sorting</string>
     <string name="def_subreddit">Default Subreddit</string>
     <string name="def_nsfw">NSFW Content</string>
