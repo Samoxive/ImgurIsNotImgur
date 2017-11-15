@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:fontFamily="@font/fontawesome"
         android:text="@string/subreddit_act" />
 
     <Button
@@ -21,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:fontFamily="@font/fontawesome"
         android:text="@string/gallery_act" />
 
     <Button
@@ -30,6 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:fontFamily="@font/fontawesome"
         android:text="@string/upload_act" />
 
     <Button
@@ -39,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:fontFamily="@font/fontawesome"
         android:text="@string/search_act" />
 
     <Button
@@ -48,5 +52,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:fontFamily="@font/fontawesome"
         android:text="@string/profile_act" />
 </LinearLayout>

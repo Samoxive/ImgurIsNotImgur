@@ -3,7 +3,6 @@ package com.imgurisnotimgur
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -31,11 +30,6 @@ class SubredditActivity : AppCompatActivity() {
         setContentView(R.layout.activity_subreddit)
 
         subredditAct.isEnabled = false
-        subredditAct.setTypeface(ResourcesCompat.getFont(this.applicationContext, R.font.fontawesome))
-        uploadAct.setTypeface(ResourcesCompat.getFont(this.applicationContext, R.font.fontawesome))
-        searchAct.setTypeface(ResourcesCompat.getFont(this.applicationContext, R.font.fontawesome))
-        profileAct.setTypeface(ResourcesCompat.getFont(this.applicationContext, R.font.fontawesome))
-        galleryAct.setTypeface(ResourcesCompat.getFont(this.applicationContext, R.font.fontawesome))
         galleryAct.setOnClickListener(NavBarButtonHandler(this, GalleryActivity::class.java))
         uploadAct.setOnClickListener(NavBarButtonHandler(this, UploadActivity::class.java))
         searchAct.setOnClickListener(NavBarButtonHandler(this, SearchActivity::class.java))
