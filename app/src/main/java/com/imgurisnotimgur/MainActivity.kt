@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         val intent = Intent(this, SubredditActivity::class.java)
 
-        AsyncAction<Int, String>({ _ ->
+        AsyncAction<Unit, String>({
             httpClient.newCall(request)
                     .execute()
                     .body()!!
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             val dataString = jsonObject.getJSONObject("data").toString()
             val account: Account = gson.fromJson(dataString, Account::class.java)
             // do account stuff
-        }).execute(1)
+        }).exec()
 
         startActivity(intent)
 
