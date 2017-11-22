@@ -1,0 +1,30 @@
+package com.imgurisnotimgur.entities
+
+data class ImgurGalleryAlbum (
+        val id: String,
+        val title: String,
+        val description: String,
+        val datetime: Long,
+        val cover: String,
+        val cover_width: Int,
+        val cover_height: Int,
+        val account_url: String,
+        val account_id: Int,
+        val privacy: String,
+        val layout: String,
+        val views: String,
+        val link: String,
+        val ups: Int,
+        val downs: Int,
+        val points: Int,
+        val score: Int,
+        val is_album: Boolean,
+        val vote: String,
+        val favorite: Boolean,
+        val nsfw: Boolean,
+        val comment_count: Int,
+        val topic: String,
+        val topic_id: Int,
+        val images_count: Int,
+        val images: Array<ImgurImage>
+)
