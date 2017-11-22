@@ -1,6 +1,6 @@
 package com.imgurisnotimgur.entities
 
-data class Account(
+data class ImgurAccount(
         val id: Int,
         val url: String,
         val bio: String,
