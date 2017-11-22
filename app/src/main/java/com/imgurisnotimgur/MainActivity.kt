@@ -4,8 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.google.gson.Gson
-import com.imgurisnotimgur.entities.Account
+import com.imgurisnotimgur.api.ImgurApi
+import com.imgurisnotimgur.entities.Image
+import com.imgurisnotimgur.entities.ImgurAccount
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
@@ -40,16 +43,11 @@ class MainActivity : AppCompatActivity() {
 
         val intent = Intent(this, SubredditActivity::class.java)
 
-        AsyncAction<Unit, String>({
-            httpClient.newCall(request)
-                    .execute()
-                    .body()!!
-                    .string()
-        }, { jsonResponse ->
-            val jsonObject = JSONObject(jsonResponse)
-            val dataString = jsonObject.getJSONObject("data").toString()
-            val account: Account = gson.fromJson(dataString, Account::class.java)
-            // do account stuff
+        AsyncAction<Unit, Array<Image>>({
+            ImgurApi.getGallery("Hot", "Viral", false)
+        }, { images ->
+            val image = images[0]
+            Log.d("", image.id)
         }).exec()
 
         startActivity(intent)
