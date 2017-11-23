@@ -45,7 +45,5 @@ class MainActivity : AppCompatActivity() {
         }).exec()
 
         startActivity(intent)
-
-
     }
 }
