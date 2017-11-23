@@ -1,9 +1,7 @@
 package com.imgurisnotimgur.api
 
 import com.google.gson.Gson
-import com.imgurisnotimgur.entities.Image
-import com.imgurisnotimgur.entities.ImgurGalleryAlbum
-import com.imgurisnotimgur.entities.SubredditImage
+import com.imgurisnotimgur.entities.*
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import java.security.InvalidParameterException
@@ -76,12 +74,14 @@ class ImgurApi {
             val gallery = gson.fromJson(imgurJson, Array<ImgurGalleryAlbum>::class.java)
             val galleryImages = gallery.map {
                  Image (
-                        if (it.is_album) { it.cover } else { it.id },
-                        it.title,
-                        it.account_url,
-                        it.points,
-                        it.datetime
-                )
+                         if (it.is_album) { it.cover } else { it.id },
+                         it.title,
+                         it.account_url,
+                         it.points,
+                         it.datetime,
+                         if (it.is_album) { it.id } else { "" },
+                         it.is_album
+                 )
             }
 
             return galleryImages.toTypedArray()
@@ -105,6 +105,29 @@ class ImgurApi {
             }
 
             return subredditImages.toTypedArray()
+        }
+
+        fun getComments(image: Image): Array<Comment> {
+            val id = if (image.isAlbum) { image.albumId } else { image.id }
+            val url = "https://api.imgur.com/3/gallery/$id/comments/best"
+            val request = HttpUtils.createRequest(url, mapOf("Authorization" to "Client-ID $clientId"))
+            val response = HttpUtils.sendRequest(request)
+            val body = response.body()!!
+            val jsonResponse = body.string()
+            val imgurJson = getJsonData(jsonResponse)
+            val gson = Gson()
+            val imgurComments = gson.fromJson(imgurJson, Array<ImgurComment>::class.java)
+            val comments = imgurComments.map {
+                Comment(
+                        it.id,
+                        it.comment,
+                        it.datetime,
+                        it.points,
+                        it.author
+                )
+            }
+
+            return comments.toTypedArray()
         }
     }
 }
