@@ -9,5 +9,7 @@ class Image (
         val title: String,
         val username: String,
         val points: Int,
-        val createdAt: Long
+        val createdAt: Long,
+        val albumId: String,
+        val isAlbum: Boolean
 ): Parcelable
