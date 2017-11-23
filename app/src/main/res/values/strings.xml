@@ -4,7 +4,7 @@
     <string name="title_activity_authentication">AuthenticationActivity</string>
     <string name="please_sign_in">Please sign in through Imgur</string>
     <string name="subreddit_act">&#xf281;</string>
-    <string name="subreddit_placeholder">/r/Subreddit</string>
+    <string name="subreddit_placeholder">Subreddit</string>
     <string name="subreddit_go">GO!</string>
     <string name="search_placeholder">Search</string>
     <string name="gallery_act">&#xf015;</string>

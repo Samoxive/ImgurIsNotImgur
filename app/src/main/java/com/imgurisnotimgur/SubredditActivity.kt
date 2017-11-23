@@ -36,7 +36,7 @@ class SubredditActivity : AppCompatActivity() {
         profileAct.setOnClickListener(NavBarButtonHandler(this, ProfileActivity::class.java))
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val subredditPreference = preferences.getString("subreddit", "/r/CatsStandingUp")
+        val subredditPreference = preferences.getString("subreddit", "CatsStandingUp")
 
         subredditInput.setText(subredditPreference, TextView.BufferType.EDITABLE)
 

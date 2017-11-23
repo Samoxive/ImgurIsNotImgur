@@ -14,7 +14,7 @@
         android:key="sort"
         android:title="@string/def_sorting" />
     <EditTextPreference
-        android:defaultValue="/r/CatsStandingUp"
+        android:defaultValue="CatsStandingUp"
         android:key="subreddit"
         android:selectAllOnFocus="true"
         android:singleLine="true"
