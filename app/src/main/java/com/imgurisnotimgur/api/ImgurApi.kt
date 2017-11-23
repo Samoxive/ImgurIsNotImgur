@@ -21,6 +21,22 @@ class ImgurApi {
             }
         }
 
+        fun getSelfAccount(accessToken: String): Account {
+            val request = HttpUtils.createRequest("https://api.imgur.com/3/account/me", mapOf("Authorization" to "Bearer $accessToken"))
+            val response = HttpUtils.sendRequest(request)
+            val body = response.body()!!
+            val jsonResponse = body.string()
+            val gson = Gson()
+            val imgurJson = getJsonData(jsonResponse)
+            val imgurAccount = gson.fromJson(imgurJson, ImgurAccount::class.java)
+            return Account(
+                    imgurAccount.url,
+                    if (imgurAccount.bio == null) { "" } else { imgurAccount.bio },
+                    imgurAccount.created,
+                    imgurAccount.reputation
+            )
+        }
+
         fun getImageFile(id: String): ByteArray {
             val request = HttpUtils.createRequest("https://i.imgur.com/$id.jpg", mapOf())
             val response = HttpUtils.sendRequest(request)
