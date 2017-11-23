@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import com.google.gson.Gson
 import com.imgurisnotimgur.api.ImgurApi
+import com.imgurisnotimgur.entities.Account
 import com.imgurisnotimgur.entities.Comment
 import com.imgurisnotimgur.entities.Image
 import com.imgurisnotimgur.entities.ImgurAccount
@@ -42,6 +43,13 @@ class MainActivity : AppCompatActivity() {
         }, { images ->
             val image = images[0]
             Log.d("", image[0].author)
+        }).exec()
+
+        AsyncAction<Unit, Account>({
+            ImgurApi.getSelfAccount(secrets.accessToken)
+        }, { account ->
+            val x = account.bio
+            Log.wtf("", x)
         }).exec()
 
         startActivity(intent)
