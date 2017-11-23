@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import com.google.gson.Gson
 import com.imgurisnotimgur.api.ImgurApi
+import com.imgurisnotimgur.entities.Comment
 import com.imgurisnotimgur.entities.Image
 import com.imgurisnotimgur.entities.ImgurAccount
 import okhttp3.OkHttpClient
@@ -26,13 +27,6 @@ class MainActivity : AppCompatActivity() {
         val expirationDate = preferences.getLong("expirationDate", 0)
         val accountId = preferences.getString("accountId", null)
         val accountUsername = preferences.getString("accountUsername", null)
-        val httpClient = OkHttpClient()
-        val gson = Gson()
-        val request = Request.Builder()
-                .url("https://api.imgur.com/3/account/me")
-                .addHeader("Authorization", "Bearer ${accessToken}")
-                .get()
-                .build()
 
         if (accessToken == null) {
             val intent = Intent(this@MainActivity, NoAuthActivity::class.java)
@@ -43,11 +37,16 @@ class MainActivity : AppCompatActivity() {
 
         val intent = Intent(this, SubredditActivity::class.java)
 
-        AsyncAction<Unit, Array<Image>>({
-            ImgurApi.getGallery("Hot", "Viral", false)
+        AsyncAction<Unit, List<Array<Comment>>>({
+            val gallery = ImgurApi.getGallery("Hot", "Viral", false)
+            val galleryComments = gallery.map {
+                image -> ImgurApi.getComments(image)
+            }
+
+            return@AsyncAction galleryComments
         }, { images ->
             val image = images[0]
-            Log.d("", image.id)
+            Log.d("", image[0].author)
         }).exec()
 
         startActivity(intent)
