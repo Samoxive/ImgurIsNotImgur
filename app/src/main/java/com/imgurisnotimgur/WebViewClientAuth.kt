@@ -28,6 +28,7 @@ class WebViewClientAuth(private val context: Context,
                 return
             }
 
+            Settings.prefs = parameters
             prefEdit.putString("accessToken", parameters.accessToken)
             prefEdit.putString("refreshToken", parameters.refreshToken)
             prefEdit.putLong("expirationDate", parameters.expirationDate.time)
