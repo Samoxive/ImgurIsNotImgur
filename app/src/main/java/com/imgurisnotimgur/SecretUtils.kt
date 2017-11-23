@@ -20,11 +20,11 @@ class SecretUtils {
 
         fun getSecrets(context: Context): Pair<Boolean, OauthResult> {
             val prefs = context.getSharedPreferences("secret", Context.MODE_PRIVATE)
-            val accessToken = prefs.getString("accessToken", null)
-            val refreshToken = prefs.getString("refreshToken", null)
+            val accessToken = prefs.getString("accessToken", "")
+            val refreshToken = prefs.getString("refreshToken", "")
             val expirationDate = prefs.getLong("expirationDate", 0)
-            val accountId = prefs.getString("accountId", null)
-            val accountUsername = prefs.getString("accountUsername", null)
+            val accountId = prefs.getString("accountId", "")
+            val accountUsername = prefs.getString("accountUsername", "")
             val result = OauthResult(
                     accessToken,
                     refreshToken,
@@ -33,7 +33,7 @@ class SecretUtils {
                     accountUsername
             )
 
-            return (accessToken != null) to result
+            return (accessToken != "") to result
         }
     }
 }
