@@ -21,14 +21,9 @@ class MainActivity : AppCompatActivity() {
         // TODO(sam): Revert this back to a main activity, ideally we should launch the gallery activity if there isn't a problem with the tokens
         setContentView(R.layout.activity_main)
 
-        val preferences = getSharedPreferences("secret", Context.MODE_PRIVATE)
-        val accessToken = preferences.getString("accessToken", null)
-        val refreshToken = preferences.getString("refreshToken", null)
-        val expirationDate = preferences.getLong("expirationDate", 0)
-        val accountId = preferences.getString("accountId", null)
-        val accountUsername = preferences.getString("accountUsername", null)
+        val (isLoggedIn, secrets) = SecretUtils.getSecrets(this)
 
-        if (accessToken == null) {
+        if (!isLoggedIn) {
             val intent = Intent(this@MainActivity, NoAuthActivity::class.java)
             startActivity(intent)
             finish()
