@@ -29,16 +29,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include
-        android:id="@+id/includePrefs"
-        layout="@layout/gallery_preferences"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/gallery_preferences_height"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subredditInput" />
-
     <!--
     The attribute "app:layout_constraintHeight_default" coupled with "layout_height="0dp"
     is needed to adjust recyclerView's height based on the other elements
@@ -47,12 +37,13 @@
         android:id="@+id/rv_gallery"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/includeNavBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="wrap"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/includePrefs"
+        app:layout_constraintTop_toBottomOf="@+id/subredditInput"
         app:spanCount="2" />
 
     <include

@@ -36,37 +36,12 @@ class SubredditActivity : AppCompatActivity() {
         profileAct.setOnClickListener(NavBarButtonHandler(this, ProfileActivity::class.java))
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val sortPreference = preferences.getString("sort", "Hot")
-        val sectionPreference = preferences.getString("section", "Viral")
         val subredditPreference = preferences.getString("subreddit", "/r/CatsStandingUp")
 
-        val sectionIndex = PreferenceUtils.findIndexOfValue(PreferenceUtils.sectionEntries, sectionPreference)
-        val sortIndex = PreferenceUtils.findIndexOfValue(PreferenceUtils.sortEntries, sortPreference)
-
-        sectionSpinner.setSelection(sectionIndex, true)
-        sortSpinner.setSelection(sortIndex, true)
         subredditInput.setText(subredditPreference, TextView.BufferType.EDITABLE)
 
         val galleryAdapter = GalleryAdapter(itemgibicekpanpa, this)
         rv_gallery.adapter = galleryAdapter
-        sectionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // We shouldn't need to do anything here as user can't select an empty entry anyways
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent!!.getItemAtPosition(position) as String
-            }
-        }
-        sortSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // We shouldn't need to do anything here as user can't select an empty entry anyways
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent!!.getItemAtPosition(position) as String
-            }
-        }
 
         rv_gallery.requestFocus()
     }
