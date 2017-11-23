@@ -72,7 +72,9 @@ class ImgurApi {
             val imgurJson = getJsonData(jsonResponse)
             val gson = Gson()
             val gallery = gson.fromJson(imgurJson, Array<ImgurGalleryAlbum>::class.java)
-            val galleryImages = gallery.map {
+            val galleryImages = gallery
+                    .filter { if (it.is_album) { it.cover != null } else { true } }
+                    .map {
                  Image (
                          if (it.is_album) { it.cover } else { it.id },
                          it.title,
@@ -83,6 +85,11 @@ class ImgurApi {
                          it.is_album
                  )
             }
+
+            // Do you know why that filter is there? Let me tell you. It's because imgur api is a shameless liar.
+            // So, appearently sometimes gallery items don't have a cover image despite them being an album
+            // Because of that, if we want null safety, we need to get rid of albums without a cover image
+            // And that folks is why you don't blindly trust API documentation.
 
             return galleryImages.toTypedArray()
         }
