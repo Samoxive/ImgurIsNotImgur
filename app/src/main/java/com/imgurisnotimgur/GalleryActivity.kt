@@ -55,6 +55,12 @@ class GalleryActivity : AppCompatActivity() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedItem = parent!!.getItemAtPosition(position) as String
+                val sortItem = sortSpinner.selectedItem as String
+
+                AsyncAction<Triple<String, String, Boolean>, Array<Image>>({ params ->
+                    val (section, sort, nsfwEnabled) = params[0]
+                    return@AsyncAction ImgurApi.getGallery(section, sort, nsfwEnabled)
+                }, { images -> galleryAdapter.items = images }).exec(Triple(selectedItem, sortItem, nsfwEnabled))
             }
         }
         sortSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
@@ -64,6 +70,12 @@ class GalleryActivity : AppCompatActivity() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedItem = parent!!.getItemAtPosition(position) as String
+                val sectionItem = sectionSpinner.selectedItem as String
+
+                AsyncAction<Triple<String, String, Boolean>, Array<Image>>({ params ->
+                    val (section, sort, nsfwEnabled) = params[0]
+                    return@AsyncAction ImgurApi.getGallery(section, sort, nsfwEnabled)
+                }, { images -> galleryAdapter.items = images }).exec(Triple(sectionItem, selectedItem, nsfwEnabled))
             }
         }
 
