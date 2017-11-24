@@ -125,7 +125,7 @@ class ImgurApi {
                         it.title,
                         it.datetime
                 )
-            }.subList(0, subredditGallery.size % 20)
+            }
 
             return subredditImages.toTypedArray()
         }
