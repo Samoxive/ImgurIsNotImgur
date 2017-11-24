@@ -1,6 +1,7 @@
 package com.imgurisnotimgur
 
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
@@ -9,6 +10,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.TextView
+import com.imgurisnotimgur.api.ImgurApi
+import com.imgurisnotimgur.entities.SubredditImage
 
 import kotlinx.android.synthetic.main.activity_subreddit.*
 import kotlinx.android.synthetic.main.gallery_preferences.*
@@ -40,10 +43,16 @@ class SubredditActivity : AppCompatActivity() {
 
         subredditInput.setText(subredditPreference, TextView.BufferType.EDITABLE)
 
-        val galleryAdapter = GalleryAdapter(itemgibicekpanpa, this)
-        rv_gallery.adapter = galleryAdapter
+        val subredditGalleryAdapter = SubredditGalleryAdapter(arrayOf())
+        rv_gallery.adapter = subredditGalleryAdapter
 
         rv_gallery.requestFocus()
+
+        AsyncAction<String, Array<SubredditImage>>({ subredditName ->
+            ImgurApi.getSubredditGallery(subredditName[0])
+        }, { images ->
+            subredditGalleryAdapter.items = images
+        }).exec(subredditPreference)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
