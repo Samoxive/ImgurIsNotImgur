@@ -21,7 +21,6 @@ class SubredditGalleryAdapter(items: Array<SubredditImage>, images: Array<ByteAr
         set(value) {
             field = value
             AsyncAction<SubredditImage, Array<ByteArray>>({ subredditImages ->
-                val before = System.currentTimeMillis()
                 val size = subredditImages.size
                 val latch = CountDownLatch(size)
                 val resultArray = Array(size, { byteArrayOf() })
@@ -33,8 +32,6 @@ class SubredditGalleryAdapter(items: Array<SubredditImage>, images: Array<ByteAr
                     }
                 }
                 latch.await()
-                val after = System.currentTimeMillis()
-                Log.wtf("Timing", (after - before).toString())
                 return@AsyncAction resultArray
             }, { imageFiles -> images = imageFiles }).exec(*value)
         }
