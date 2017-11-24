@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ImgurIsNotImgur</string>
+    <string name="app_name">INI</string>
     <string name="authenticate">Yetkilendir</string>
     <string name="title_activity_authentication">YetkilendirmeAktivitesi</string>
     <string name="please_sign_in">Lütfen Imgur\'da oturum açın</string>

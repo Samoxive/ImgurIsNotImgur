@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">INI</string>
+    <string name="authenticate">Authentifizieren</string>
+    <string name="title_activity_authentication">Authentifizierungsaktivität</string>
+    <string name="please_sign_in">Bitte melden Sie sich über Imgur an</string>
+    <string name="subreddit_act">&#xf281;</string>
+    <string name="subreddit_placeholder">Subreddit</string>
+    <string name="subreddit_go">GEHEN!</string>
+    <string name="search_placeholder">Suche</string>
+    <string name="gallery_act">&#xf015;</string>
+    <string name="upload_act">&#xf030;</string>
+    <string name="profile_act">&#xf007;</string>
+    <string name="upload_photo_label">Laden Sie ein Foto!</string>
+    <string name="upload_from_photo_roll">Auswahl aus der Galerie</string>
+    <string name="upload_from_new_photo">Nimm ein neues Foto</string>
+    <string name="search_act">&#xf002;</string>
+    <string name="def_section">Standardabschnitt</string>
+    <string name="def_sorting">Standardsortierung</string>
+    <string name="def_subreddit">Standard-Unterreddit</string>
+    <string name="def_nsfw">NSFW-Inhalt</string>
+    <string-array name="section">
+        <item>Heiß</item>
+        <item>Beste</item>
+        <item>Benutzer</item>
+    </string-array>
+    <string-array name="sort">
+        <item>Viral</item>
+        <item>Zeit</item>
+        <item>Beste (Heute)</item>
+        <item>Beste (Woche)</item>
+        <item>Beste (Monat)</item>
+        <item>Beste (Jahre)</item>
+        <item>Beste (Alle Zeit)</item>
+    </string-array>
+    <string name="title_activity_subreddit">Subredditaktivität</string>
+    <string name="settings">Einstellungen</string>
+    <string name="quit">Beenden</string>
+    <!-- WÖRK WÖRK WÖRK -->
+    <string name="image_title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+</resources>
