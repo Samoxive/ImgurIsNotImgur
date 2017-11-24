@@ -57,20 +57,26 @@ class ImgurApi {
             }
         }
 
-        fun getGallery(section: String, sort: String, nsfwEnabled: Boolean): Array<Image> {
-            val sectionParam = section.toLowerCase()
+        fun getGallery(section: Int, sort: Int, nsfwEnabled: Boolean): Array<Image> {
+            val sectionParam = when(section) {
+                0 -> "hot"
+                1 -> "top"
+                2 -> "user"
+                else -> "hot"
+            }
+
             val sortParam = when (sort) {
-                "Viral" -> "viral"
-                "Time" -> "time"
+                0 -> "viral"
+                1 -> "time"
                 else -> "top" // Top (x)
             }
 
             val timeWindow = when (sort) {
-                "Top (today)" -> "day"
-                "Top (this week)" -> "week"
-                "Top (this month)" -> "month"
-                "Top (this year)" -> "year"
-                "Top (all time)" -> "all"
+                2 -> "day"
+                3 -> "week"
+                4 -> "month"
+                5 -> "year"
+                6 -> "all"
                 else -> ""
             }
 
@@ -151,6 +157,22 @@ class ImgurApi {
             }
 
             return comments.toTypedArray()
+        }
+
+        enum class Section {
+            Hot,
+            Top,
+            User
+        }
+
+        enum class Sort {
+            Viral,
+            Time,
+            TopToday,
+            TopThisWeek,
+            TopThisMonth,
+            TopThisYear,
+            TopAllTime
         }
     }
 }

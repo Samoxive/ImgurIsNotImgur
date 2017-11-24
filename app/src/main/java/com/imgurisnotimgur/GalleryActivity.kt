@@ -54,13 +54,12 @@ class GalleryActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent!!.getItemAtPosition(position) as String
-                val sortItem = sortSpinner.selectedItem as String
+                val sortPosition = sortSpinner.selectedItemPosition
 
-                AsyncAction<Triple<String, String, Boolean>, Array<Image>>({ params ->
+                AsyncAction<Triple<Int, Int, Boolean>, Array<Image>>({ params ->
                     val (section, sort, nsfwEnabled) = params[0]
                     return@AsyncAction ImgurApi.getGallery(section, sort, nsfwEnabled)
-                }, { images -> galleryAdapter.items = images }).exec(Triple(selectedItem, sortItem, nsfwEnabled))
+                }, { images -> galleryAdapter.items = images }).exec(Triple(position, sortPosition, nsfwEnabled))
             }
         }
         sortSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
@@ -69,20 +68,19 @@ class GalleryActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent!!.getItemAtPosition(position) as String
-                val sectionItem = sectionSpinner.selectedItem as String
+                val sectionPosition = sectionSpinner.selectedItemPosition
 
-                AsyncAction<Triple<String, String, Boolean>, Array<Image>>({ params ->
+                AsyncAction<Triple<Int, Int, Boolean>, Array<Image>>({ params ->
                     val (section, sort, nsfwEnabled) = params[0]
                     return@AsyncAction ImgurApi.getGallery(section, sort, nsfwEnabled)
-                }, { images -> galleryAdapter.items = images }).exec(Triple(sectionItem, selectedItem, nsfwEnabled))
+                }, { images -> galleryAdapter.items = images }).exec(Triple(sectionPosition, position, nsfwEnabled))
             }
         }
 
-        AsyncAction<Triple<String, String, Boolean>, Array<Image>>({ params ->
+        AsyncAction<Triple<Int, Int, Boolean>, Array<Image>>({ params ->
             val (section, sort, nsfwEnabled) = params[0]
             return@AsyncAction ImgurApi.getGallery(section, sort, nsfwEnabled)
-        }, { images -> galleryAdapter.items = images }).exec(Triple(sectionPreference, sortPreference, nsfwEnabled))
+        }, { images -> galleryAdapter.items = images }).exec(Triple(sectionIndex, sortIndex, nsfwEnabled))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
