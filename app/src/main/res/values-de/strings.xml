@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ImgurIsNotImgur</string>
+    <string name="app_name">INI</string>
     <string name="authenticate">Authentifizieren</string>
     <string name="title_activity_authentication">Authentifizierungsaktivität</string>
     <string name="please_sign_in">Bitte melden Sie sich über Imgur an</string>
