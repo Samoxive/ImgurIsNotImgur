@@ -4,10 +4,19 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.Response
+import java.util.concurrent.TimeUnit
 
 class HttpUtils {
     companion object {
-        val client = OkHttpClient()
+
+        val clientBuilder = OkHttpClient.Builder()
+
+        init{
+            clientBuilder.writeTimeout(30, TimeUnit.SECONDS)
+            clientBuilder.readTimeout(30, TimeUnit.SECONDS)
+        }
+
+        val client = clientBuilder.build()
 
         fun createRequest(method: HttpMethod, url: String, headers: Map<String, String>, body: RequestBody): Request {
             val builder = Request.Builder()
