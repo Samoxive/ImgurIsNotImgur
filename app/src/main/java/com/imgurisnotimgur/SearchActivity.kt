@@ -44,7 +44,7 @@ class SearchActivity : AppCompatActivity() {
         sectionSpinner.setSelection(sectionIndex, true)
         sortSpinner.setSelection(sortIndex, true)
 
-        val galleryAdapter = GalleryAdapter(intArrayOf(), this)
+        val galleryAdapter = GalleryAdapter(arrayOf(), arrayOf(), this)
         rv_gallery.adapter = galleryAdapter
         sectionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -69,7 +69,7 @@ class SearchActivity : AppCompatActivity() {
 
         searchInput.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                galleryAdapter.items = itemgibicekpanpa
+                galleryAdapter.items = arrayOf()
                 rv_gallery.requestFocus()
                 return false
             }
