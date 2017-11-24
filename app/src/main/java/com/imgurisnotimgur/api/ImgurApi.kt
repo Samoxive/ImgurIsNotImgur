@@ -10,7 +10,7 @@ class ImgurApi {
     companion object {
         val clientId = "7333a4b592aab44"
         val clientSecret = "07dd18a125014c99422a3de9e33cfb50ff5a1785"
-        val thumbnailMode = "l"
+        val thumbnailMode = "m"
 
         private fun getJsonData(jsonResponse: String): String {
             val responseObject = JSONObject(jsonResponse)
@@ -125,7 +125,7 @@ class ImgurApi {
                         it.title,
                         it.datetime
                 )
-            }
+            }.subList(0, subredditGallery.size % 20)
 
             return subredditImages.toTypedArray()
         }
