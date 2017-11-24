@@ -10,6 +10,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
         <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -27,6 +31,7 @@
                 android:id="@+id/subredditImageTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:scrollHorizontally="false"
                 android:text="@string/image_title"
                 android:textColor="@color/colorAccent"
