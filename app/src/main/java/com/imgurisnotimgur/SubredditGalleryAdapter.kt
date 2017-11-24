@@ -1,6 +1,7 @@
 package com.imgurisnotimgur
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.imgurisnotimgur.api.ImgurApi
@@ -19,23 +20,25 @@ class SubredditGalleryAdapter(items: Array<SubredditImage>, images: Array<ByteAr
     var items: Array<SubredditImage> = items
         set(value) {
             field = value
-            AsyncAction<SubredditImage, Array<ByteArray>>({ arrayOfSubredditImages ->
-                val latch = CountDownLatch(arrayOfSubredditImages.size)
-                val resultArray = Array(arrayOfSubredditImages.size, { byteArrayOf() })
-                val pool = Executors.newFixedThreadPool(4)
-                for (i in arrayOfSubredditImages.indices) {
+            AsyncAction<SubredditImage, Array<ByteArray>>({ subredditImages ->
+                val before = System.currentTimeMillis()
+                val size = subredditImages.size
+                val latch = CountDownLatch(size)
+                val resultArray = Array(size, { byteArrayOf() })
+                val pool = AsyncAction.pool
+                for (i in subredditImages.indices) {
                     pool.submit {
-                        resultArray[i] = ImgurApi.getThumbnailFile(arrayOfSubredditImages[i].id)
+                        resultArray[i] = ImgurApi.getThumbnailFile(subredditImages[i].id)
                         latch.countDown()
                     }
                 }
                 latch.await()
+                val after = System.currentTimeMillis()
+                Log.wtf("Timing", (after - before).toString())
                 return@AsyncAction resultArray
             }, { imageFiles -> images = imageFiles }).exec(*value)
         }
-    /*arrayOfSubredditImages.map {
-        ImgurApi.getThumbnailFile(it.id)
-    }.toTypedArray()*/
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubredditGalleryViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.subreddit_gallery_list_item, parent, false)
