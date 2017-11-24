@@ -46,6 +46,14 @@ class SubredditActivity : AppCompatActivity() {
         val subredditGalleryAdapter = SubredditGalleryAdapter(arrayOf(), arrayOf())
         rv_gallery.adapter = subredditGalleryAdapter
 
+        button.setOnClickListener {
+            AsyncAction<String, Array<SubredditImage>>({ subredditName ->
+                ImgurApi.getSubredditGallery(subredditName[0])
+            }, { images ->
+                subredditGalleryAdapter.items = images
+            }).exec(subredditInput.text.toString())
+        }
+
         rv_gallery.requestFocus()
 
         AsyncAction<String, Array<SubredditImage>>({ subredditName ->
