@@ -16,15 +16,11 @@ class SubredditGalleryViewHolder(itemView: View, val adapter: SubredditGalleryAd
         itemView.setOnClickListener(this)
     }
 
-    fun bind(subredditImage: SubredditImage) {
+    fun bind(imagePair: Pair<SubredditImage, ByteArray>) {
+        val (subredditImage, imageFile) = imagePair
         titleText.text = subredditImage.title
-
-        AsyncAction<Unit, ByteArray>({ x ->
-            ImgurApi.getThumbnailFile(subredditImage.id)
-        }, {
-            val bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
-            imageView.setImageBitmap(bitmap)
-        }).exec()
+        val bitmap = BitmapFactory.decodeByteArray(imageFile, 0, imageFile.size)
+        imageView.setImageBitmap(bitmap)
     }
 
     override fun onClick(view: View) {

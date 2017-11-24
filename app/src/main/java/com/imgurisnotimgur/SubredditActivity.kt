@@ -43,7 +43,7 @@ class SubredditActivity : AppCompatActivity() {
 
         subredditInput.setText(subredditPreference, TextView.BufferType.EDITABLE)
 
-        val subredditGalleryAdapter = SubredditGalleryAdapter(arrayOf())
+        val subredditGalleryAdapter = SubredditGalleryAdapter(arrayOf(), arrayOf())
         rv_gallery.adapter = subredditGalleryAdapter
 
         rv_gallery.requestFocus()
