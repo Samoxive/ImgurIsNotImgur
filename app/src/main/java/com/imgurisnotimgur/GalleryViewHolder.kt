@@ -20,7 +20,7 @@ class GalleryViewHolder(itemView: View, val adapter: GalleryAdapter) : RecyclerV
     fun bind(imagePair: Pair<Image, ByteArray>) {
         val (image, imageFile) = imagePair
         titleText.text = image.title
-        imageUpvotesText.text = "${image.points} Points"
+        imageUpvotesText.text = "${image.points} ${adapter.activity.getText(R.string.points)}"
         imageAuthorText.text = image.username
         val bitmap = BitmapFactory.decodeByteArray(imageFile, 0, imageFile.size)
         listItemGalleryView.setImageBitmap(bitmap)
