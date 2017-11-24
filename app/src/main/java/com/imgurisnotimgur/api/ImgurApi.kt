@@ -158,21 +158,5 @@ class ImgurApi {
 
             return comments.toTypedArray()
         }
-
-        enum class Section {
-            Hot,
-            Top,
-            User
-        }
-
-        enum class Sort {
-            Viral,
-            Time,
-            TopToday,
-            TopThisWeek,
-            TopThisMonth,
-            TopThisYear,
-            TopAllTime
-        }
     }
 }
