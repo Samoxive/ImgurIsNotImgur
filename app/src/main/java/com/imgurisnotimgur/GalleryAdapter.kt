@@ -39,9 +39,7 @@ class GalleryAdapter(items: IntArray, val activity: Activity) : RecyclerView.Ada
         holder.bind(scaled)
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount(): Int = items.size
 
     fun onItemClick(position: Int) {
         val intent = Intent(activity, ImageDetailActivity::class.java)
