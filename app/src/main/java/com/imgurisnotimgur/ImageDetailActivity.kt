@@ -2,6 +2,8 @@ package com.imgurisnotimgur
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.View
 import android.widget.ScrollView
 import com.imgurisnotimgur.api.ImgurApi
@@ -29,6 +31,10 @@ class ImageDetailActivity : AppCompatActivity() {
         }).exec()
 
         AsyncAction<Unit, Array<Comment>>({ ImgurApi.getComments(image) }, { commentAdapter.items = it }).exec()
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        StaggeredGridLayoutManager(1, 1).isAutoMeasureEnabled
+        layoutManager.isAutoMeasureEnabled = false
+        commentsView.layoutManager = layoutManager
         commentsView.adapter = commentAdapter
     }
 }
