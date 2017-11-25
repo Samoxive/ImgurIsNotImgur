@@ -1,5 +1,7 @@
 package com.imgurisnotimgur
 
+import android.app.Activity
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,7 +13,7 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class SubredditGalleryAdapter(items: Array<SubredditImage>, images: Array<ByteArray>): RecyclerView.Adapter<SubredditGalleryViewHolder>() {
+class SubredditGalleryAdapter(items: Array<SubredditImage>, images: Array<ByteArray>, val activity: Activity): RecyclerView.Adapter<SubredditGalleryViewHolder>() {
     var images: Array<ByteArray> = images
         set(value) {
             field = value
@@ -49,6 +51,8 @@ class SubredditGalleryAdapter(items: Array<SubredditImage>, images: Array<ByteAr
     override fun getItemCount(): Int = items.size
 
     fun onItemClick(position: Int) {
-
+        val intent = Intent(activity, SubredditImageDetail::class.java)
+        intent.putExtra("image", items[position])
+        activity.startActivity(intent)
     }
 }
