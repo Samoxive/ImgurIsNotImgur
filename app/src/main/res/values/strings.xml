@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name" translatable="false">ImgurIsNotImgur</string>
-    <string name="ok">OK</string>
-    <string name="open">Open</string>
     <string name="authenticate">Authenticate</string>
     <string name="title_activity_authentication">AuthenticationActivity</string>
     <string name="please_sign_in">Please sign in through Imgur</string>
@@ -16,9 +14,6 @@
     <string name="created_at">Created At:</string>
     <string name="reputation">Reputation:</string>
     <string name="bio">Biography:</string>
-    <string name="select_picture">Select Picture</string>
-    <string name="image_uploaded">Your image is uploaded! URL:</string>
-    <string name="image_uploaded_success">Upload Successful</string>
     <string name="upload_photo_label">Upload a photo!</string>
     <string name="upload_from_photo_roll">Pick from gallery</string>
     <string name="upload_from_new_photo">Take a new photo</string>
@@ -49,4 +44,10 @@
     <!-- İyi akşamlar ozan bey -->
     <string name="image_title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
     <string name="app_launcher_name" translatable="false">ini</string>
+    <string name="ok">OK</string>
+    <string name="open">Open</string>
+    <string name="select_picture">Select Picture</string>
+    <string name="image_uploaded">Your image is uploaded! URL:</string>
+    <string name="image_uploaded_success">Upload Successful!</string>
+    <string name="username" translatable="false">FanOfCats98</string>
 </resources>

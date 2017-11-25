@@ -18,46 +18,51 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="128dp"
         android:text="@string/upload_photo_label"
         android:textColor="@color/colorTitle"
         android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/pickUpload"
-        android:layout_width="wrap_content"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:drawableBottom="@drawable/ic_camera_roll_black_24dp"
-        android:drawablePadding="8dp"
-        android:paddingBottom="36dp"
-        android:paddingTop="36dp"
-        android:text="@string/upload_from_photo_roll"
-        app:layout_constraintBottom_toTopOf="@+id/includeNavBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/cameraUpload"
-        android:layout_width="wrap_content"
-        android:layout_height="126dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="8dp"
-        android:drawableBottom="@drawable/ic_photo_camera_black_24dp"
-        android:drawablePadding="8dp"
-        android:paddingBottom="36dp"
-        android:paddingTop="36dp"
-        android:text="@string/upload_from_new_photo"
+        android:layout_marginBottom="128dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/includeNavBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/pickUpload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableBottom="@drawable/ic_camera_roll_black_24dp"
+            android:drawablePadding="8dp"
+            android:paddingBottom="36dp"
+            android:paddingTop="36dp"
+            android:text="@string/upload_from_photo_roll" />
+
+        <Button
+            android:id="@+id/cameraUpload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableBottom="@drawable/ic_photo_camera_black_24dp"
+            android:drawablePadding="8dp"
+            android:paddingBottom="36dp"
+            android:paddingTop="36dp"
+            android:text="@string/upload_from_new_photo" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
