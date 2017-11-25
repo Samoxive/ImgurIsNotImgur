@@ -12,19 +12,10 @@ import android.widget.SearchView
 import com.imgurisnotimgur.api.ImgurApi
 import com.imgurisnotimgur.entities.Image
 import kotlinx.android.synthetic.main.activity_search.*
-import kotlinx.android.synthetic.main.gallery_preferences.*
 import kotlinx.android.synthetic.main.navigation_bar.*
+import kotlinx.android.synthetic.main.search_preferences.*
 
 class SearchActivity : AppCompatActivity() {
-    val itemgibicekpanpa = intArrayOf(
-            R.drawable.cat1,
-            R.drawable.cat2,
-            R.drawable.cat3,
-            R.drawable.cat4,
-            R.drawable.cat5,
-            R.drawable.cat6,
-            R.drawable.cat7
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +28,11 @@ class SearchActivity : AppCompatActivity() {
         profileAct.setOnClickListener(NavBarButtonHandler(this, ProfileActivity::class.java))
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val sortPreference = preferences.getString("sort", "Hot")
+        val sortPreferenceDefault = resources.getString(R.string.sort_default)
+        val sortPreference = preferences.getString("sort", sortPreferenceDefault)
 
-        val sortIndex = PreferenceUtils.findIndexOfValue(PreferenceUtils.sortEntries, sortPreference)
+        val sortEntries = resources.getStringArray(R.array.sort)
+        val sortIndex = PreferenceUtils.findIndexOfValue(sortEntries, sortPreference)
 
         sortSpinner.setSelection(sortIndex, true)
 
@@ -52,10 +45,8 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                AsyncAction<Int, Array<Image>>({ params ->
-                    val (sort) = params
-                    return@AsyncAction ImgurApi.getSearch(searchInput.query.toString(), sort)
-                }, { images -> galleryAdapter.items = images }).exec(position)
+                AsyncAction<Unit, Array<Image>>({ ImgurApi.getSearch(searchInput.query.toString(), position) },
+                        { images -> galleryAdapter.items = images }).exec()
             }
         }
 
@@ -63,12 +54,11 @@ class SearchActivity : AppCompatActivity() {
 
         searchInput.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                AsyncAction<Int, Array<Image>>({ params ->
-                    val (sort) = params
-                    return@AsyncAction ImgurApi.getSearch(query, sort)
-                }, { images -> galleryAdapter.items = images
+                val sortIndex = sortSpinner.selectedItemPosition
+                AsyncAction<Unit, Array<Image>>({ ImgurApi.getSearch(query, sortIndex) }, { images ->
+                    galleryAdapter.items = images
                     rv_gallery.requestFocus()
-                }).exec(sortIndex)
+                }).exec()
                 return false
             }
 

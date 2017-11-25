@@ -15,15 +15,6 @@ import kotlinx.android.synthetic.main.gallery_preferences.*
 import kotlinx.android.synthetic.main.navigation_bar.*
 
 class GalleryActivity : AppCompatActivity() {
-    val itemgibicekpanpa = intArrayOf(
-            R.drawable.cat1,
-            R.drawable.cat2,
-            R.drawable.cat3,
-            R.drawable.cat4,
-            R.drawable.cat5,
-            R.drawable.cat6,
-            R.drawable.cat7
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +31,11 @@ class GalleryActivity : AppCompatActivity() {
         val sectionPreference = preferences.getString("section", "Viral")
         val nsfwEnabled = preferences.getBoolean("nsfw_enabled", false)
 
-        val sectionIndex = PreferenceUtils.findIndexOfValue(PreferenceUtils.sectionEntries, sectionPreference)
-        val sortIndex = PreferenceUtils.findIndexOfValue(PreferenceUtils.sortEntries, sortPreference)
+        val sectionEntries = resources.getStringArray(R.array.section)
+        val sortEntries = resources.getStringArray(R.array.sort)
+
+        val sectionIndex = PreferenceUtils.findIndexOfValue(sectionEntries, sectionPreference)
+        val sortIndex = PreferenceUtils.findIndexOfValue(sortEntries, sortPreference)
 
         sectionSpinner.setSelection(sectionIndex, true)
         sortSpinner.setSelection(sortIndex, true)
@@ -56,10 +50,8 @@ class GalleryActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val sortPosition = sortSpinner.selectedItemPosition
 
-                AsyncAction<Triple<Int, Int, Boolean>, Array<Image>>({ params ->
-                    val (section, sort, nsfwEnabled) = params[0]
-                    return@AsyncAction ImgurApi.getGallery(section, sort, nsfwEnabled)
-                }, { images -> galleryAdapter.items = images }).exec(Triple(position, sortPosition, nsfwEnabled))
+                AsyncAction<Unit, Array<Image>>({ ImgurApi.getGallery(position, sortPosition, nsfwEnabled) },
+                        { images -> galleryAdapter.items = images }).exec()
             }
         }
             sortSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
@@ -70,17 +62,13 @@ class GalleryActivity : AppCompatActivity() {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                     val sectionPosition = sectionSpinner.selectedItemPosition
 
-                    AsyncAction<Triple<Int, Int, Boolean>, Array<Image>>({ params ->
-                        val (section, sort, nsfwEnabled) = params[0]
-                        return@AsyncAction ImgurApi.getGallery(section, sort, nsfwEnabled)
-                    }, { images -> galleryAdapter.items = images }).exec(Triple(sectionPosition, position, nsfwEnabled))
+                    AsyncAction<Unit, Array<Image>>({ ImgurApi.getGallery(sectionPosition, position, nsfwEnabled) },
+                            { images -> galleryAdapter.items = images }).exec()
                 }
             }
 
-            AsyncAction<Triple<Int, Int, Boolean>, Array<Image>>({ params ->
-                val (section, sort, nsfwEnabled) = params[0]
-                return@AsyncAction ImgurApi.getGallery(section, sort, nsfwEnabled)
-        }, { images -> galleryAdapter.items = images }).exec(Triple(sectionIndex, sortIndex, nsfwEnabled))
+            AsyncAction<Unit, Array<Image>>({ ImgurApi.getGallery(sectionIndex, sortIndex, nsfwEnabled) },
+                    { images -> galleryAdapter.items = images }).exec()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
