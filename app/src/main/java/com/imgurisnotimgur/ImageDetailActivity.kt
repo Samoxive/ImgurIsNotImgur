@@ -19,7 +19,7 @@ class ImageDetailActivity : AppCompatActivity() {
 
         val startIntent = intent
         val image = startIntent.getParcelableExtra<Image>("image")
-        val commentAdapter = CommentAdapter(arrayOf())
+        val commentAdapter = CommentAdapter(arrayOf(), this)
 
         detailImageTitle.text = image.title
         detailImageAuthor.text = image.username
