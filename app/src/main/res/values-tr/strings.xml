@@ -38,4 +38,6 @@
     <string name="select_picture">Fotoğraf Seç</string>
     <string name="image_uploaded">Fotoğraf başarıyla gönderildi! URL:</string>
     <string name="image_uploaded_success">Gönderim Başarılı</string>
+    <string name="ok">Tamam</string>
+    <string name="open">Aç</string>
 </resources>

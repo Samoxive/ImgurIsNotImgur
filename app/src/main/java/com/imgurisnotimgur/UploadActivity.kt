@@ -51,6 +51,7 @@ class UploadActivity : AppCompatActivity() {
                 val file = if (requestCode == GALLERY_RESULT) {
                     contentResolver.openInputStream(uri).readBytes()
                 } else {
+                    // Currently we upload the thumbnail camera sends, replace this to upload the actual file
                     val bitmap = data!!.extras.get("data") as Bitmap
                     val stream = ByteArrayOutputStream()
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
@@ -60,11 +61,13 @@ class UploadActivity : AppCompatActivity() {
             }, { imageUrl ->
                 val imageUploadedString = getString(R.string.image_uploaded)
                 val imageUploadSuccessString = getString(R.string.image_uploaded_success)
+                val okString = getString(R.string.ok)
+                val openString = getString(R.string.open)
                 val dialog = AlertDialog.Builder(this)
                         .setMessage("$imageUploadedString $imageUrl")
                         .setTitle(imageUploadSuccessString)
-                        .setPositiveButton("Ok", { _, _ ->  })
-                        .setNeutralButton("Open", { _, _ ->
+                        .setPositiveButton(okString, { _, _ ->  })
+                        .setNeutralButton(openString, { _, _ ->
                             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(imageUrl))
                             startActivity(intent)
                         })
