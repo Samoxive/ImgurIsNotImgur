@@ -6,7 +6,7 @@
 
     <include
         android:id="@+id/includePrefs"
-        layout="@layout/gallery_preferences"
+        layout="@layout/search_preferences"
         android:layout_width="0dp"
         android:layout_height="@dimen/gallery_preferences_height"
         android:layout_marginTop="8dp"

@@ -3,7 +3,7 @@
     <string name="title_activity_authentication">YetkilendirmeAktivitesi</string>
     <string name="please_sign_in">Lütfen Imgur\'da oturum açın</string>
     <string name="subreddit_placeholder">Subreddit</string>
-    <string name="subreddit_go">Git!</string>
+    <string name="subreddit_go">GİT!</string>
     <string name="search_placeholder">Ara</string>
     <string name="points">Puan</string>
     <string name="upload_photo_label">Bir fotoğraf yükle!</string>
