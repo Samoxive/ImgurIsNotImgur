@@ -25,12 +25,12 @@ class ImageDetailActivity : AppCompatActivity() {
         detailImageAuthor.text = image.username
         detailImageDate.text = image.createdAt.toString()
 
-        AsyncAction<Unit, ByteArray>({ ImgurApi.getImageFile(image.id) }, { file ->
+        AsyncAction({ ImgurApi.getImageFile(image.id) }, { file ->
             val bitmap = ImageUtils.getScaledDownBitmap(file)
             detailImageView.setImageBitmap(bitmap)
-        }).exec()
+        })
 
-        AsyncAction<Unit, Array<Comment>>({ ImgurApi.getComments(image) }, { commentAdapter.items = it }).exec()
+        AsyncAction({ ImgurApi.getComments(image) }, { commentAdapter.items = it })
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         StaggeredGridLayoutManager(1, 1).isAutoMeasureEnabled
         layoutManager.isAutoMeasureEnabled = false

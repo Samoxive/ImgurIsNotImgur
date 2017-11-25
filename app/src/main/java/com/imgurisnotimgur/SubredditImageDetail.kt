@@ -19,10 +19,10 @@ class SubredditImageDetail : AppCompatActivity() {
         if (image != null) {
             subredditDetailImageTitle.text = image.title
             subredditDetailImageTime.text = image.createdAt.toString()
-            AsyncAction<Unit, ByteArray>({ ImgurApi.getImageFile(image.id) }, { file ->
+            AsyncAction({ ImgurApi.getImageFile(image.id) }, { file ->
                 val bitmap = ImageUtils.getScaledDownBitmap(file)
                 subredditDetailImage.setImageBitmap(bitmap)
-            }).exec()
+            })
         }
     }
 }

@@ -37,7 +37,7 @@ class ProfileActivity : AppCompatActivity() {
         url.text = "https://samoxive.imgur.com"
 
         val accessTok = SecretUtils.getSecrets(this).second.accessToken
-        AsyncAction<String, Account>({ ImgurApi.getSelfAccount(accessTok) }, { account ->
+        AsyncAction({ ImgurApi.getSelfAccount(accessTok) }, { account ->
             val creationDate = Date(account.createdAt * 1000)
             val dateFormat = DateFormat.getLongDateFormat(this)
             val timeString = dateFormat.format(creationDate)
@@ -46,7 +46,7 @@ class ProfileActivity : AppCompatActivity() {
             createdAt.text = "$createdAtString $timeString"
             reputation.text = "$reputationString ${account.reputation}"
             url.text = "https://${account.username}.imgur.com"
-        }).exec()
+        })
 
     }
 

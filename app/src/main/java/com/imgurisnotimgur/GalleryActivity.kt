@@ -50,8 +50,8 @@ class GalleryActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val sortPosition = sortSpinner.selectedItemPosition
 
-                AsyncAction<Unit, Array<Image>>({ ImgurApi.getGallery(position, sortPosition, nsfwEnabled) },
-                        { images -> galleryAdapter.items = images }).exec()
+                AsyncAction({ ImgurApi.getGallery(position, sortPosition, nsfwEnabled) },
+                        { images -> galleryAdapter.items = images })
             }
         }
             sortSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
@@ -62,13 +62,13 @@ class GalleryActivity : AppCompatActivity() {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                     val sectionPosition = sectionSpinner.selectedItemPosition
 
-                    AsyncAction<Unit, Array<Image>>({ ImgurApi.getGallery(sectionPosition, position, nsfwEnabled) },
-                            { images -> galleryAdapter.items = images }).exec()
+                    AsyncAction({ ImgurApi.getGallery(sectionPosition, position, nsfwEnabled) },
+                            { images -> galleryAdapter.items = images })
                 }
             }
 
-            AsyncAction<Unit, Array<Image>>({ ImgurApi.getGallery(sectionIndex, sortIndex, nsfwEnabled) },
-                    { images -> galleryAdapter.items = images }).exec()
+            AsyncAction({ ImgurApi.getGallery(sectionIndex, sortIndex, nsfwEnabled) },
+                    { images -> galleryAdapter.items = images })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -18,15 +18,6 @@ import kotlinx.android.synthetic.main.gallery_preferences.*
 import kotlinx.android.synthetic.main.navigation_bar.*
 
 class SubredditActivity : AppCompatActivity() {
-    val itemgibicekpanpa = intArrayOf(
-            R.drawable.cat1,
-            R.drawable.cat2,
-            R.drawable.cat3,
-            R.drawable.cat4,
-            R.drawable.cat5,
-            R.drawable.cat6,
-            R.drawable.cat7
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,20 +38,17 @@ class SubredditActivity : AppCompatActivity() {
         rv_gallery.adapter = subredditGalleryAdapter
 
         button.setOnClickListener {
-            AsyncAction<String, Array<SubredditImage>>({ subredditName ->
-                ImgurApi.getSubredditGallery(subredditName[0])
+            AsyncAction({
+                ImgurApi.getSubredditGallery(subredditInput.text.toString())
             }, { images ->
                 subredditGalleryAdapter.items = images
-            }).exec(subredditInput.text.toString())
+            })
         }
 
         rv_gallery.requestFocus()
 
-        AsyncAction<String, Array<SubredditImage>>({ subredditName ->
-            ImgurApi.getSubredditGallery(subredditName[0])
-        }, { images ->
-            subredditGalleryAdapter.items = images
-        }).exec(subredditPreference)
+        AsyncAction({ ImgurApi.getSubredditGallery(subredditPreference) },
+                { images -> subredditGalleryAdapter.items = images })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

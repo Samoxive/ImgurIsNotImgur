@@ -22,20 +22,20 @@ class SubredditGalleryAdapter(items: Array<SubredditImage>, images: Array<ByteAr
     var items: Array<SubredditImage> = items
         @Synchronized set(value) {
             field = value
-            AsyncAction<SubredditImage, Array<ByteArray>>({ subredditImages ->
-                val size = subredditImages.size
+            AsyncAction({
+                val size = value.size
                 val latch = CountDownLatch(size)
                 val resultArray = Array(size, { byteArrayOf() })
                 val pool = AsyncAction.pool
-                for (i in subredditImages.indices) {
+                for (i in value.indices) {
                     pool.submit {
-                        resultArray[i] = ImgurApi.getThumbnailFile(subredditImages[i].id)
+                        resultArray[i] = ImgurApi.getThumbnailFile(value[i].id)
                         latch.countDown()
                     }
                 }
                 latch.await()
                 return@AsyncAction resultArray
-            }, { imageFiles -> images = imageFiles }).exec(*value)
+            }, { imageFiles -> images = imageFiles })
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubredditGalleryViewHolder {

@@ -45,7 +45,7 @@ class UploadActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
-            AsyncAction<Unit, String>({
+            AsyncAction({
                 val uri = data?.data
                 val accessToken = SecretUtils.getSecrets(this).second.accessToken
                 val file = if (requestCode == GALLERY_RESULT) {
@@ -74,7 +74,7 @@ class UploadActivity : AppCompatActivity() {
                         .setCancelable(true)
                         .create()
                 dialog.show()
-            }).exec()
+            })
         }
     }
 

@@ -1,22 +1,19 @@
 package com.imgurisnotimgur
 
 import android.os.AsyncTask
-import java.util.concurrent.Executor
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class AsyncAction<P, R>(val asyncRunnable: (Array<out P>) -> R, val resultHandler: (R) -> Unit): AsyncTask<P, Void, R>() {
+class AsyncAction<R>(val asyncRunnable: () -> R, val resultHandler: (R) -> Unit): AsyncTask<Unit, Void, R>() {
     companion object {
         val pool: ExecutorService = Executors.newCachedThreadPool()
     }
 
-    override fun doInBackground(vararg params: P): R = asyncRunnable(params)
-
-    override fun onPostExecute(result: R) {
-        resultHandler(result)
+    init {
+        exec()
     }
 
-    fun exec(vararg params: P) {
-        super.executeOnExecutor(pool, *params)
-    }
+    override fun doInBackground(vararg params: Unit): R = asyncRunnable()
+    override fun onPostExecute(result: R) = resultHandler(result)
+    private fun exec() = super.executeOnExecutor(pool)
 }

@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.SearchView
 import com.imgurisnotimgur.api.ImgurApi
-import com.imgurisnotimgur.entities.Image
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.navigation_bar.*
 import kotlinx.android.synthetic.main.search_preferences.*
@@ -45,8 +44,8 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                AsyncAction<Unit, Array<Image>>({ ImgurApi.getSearch(searchInput.query.toString(), position) },
-                        { images -> galleryAdapter.items = images }).exec()
+                AsyncAction({ ImgurApi.getSearch(searchInput.query.toString(), position) },
+                        { images -> galleryAdapter.items = images })
             }
         }
 
@@ -55,10 +54,10 @@ class SearchActivity : AppCompatActivity() {
         searchInput.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 val sortIndex = sortSpinner.selectedItemPosition
-                AsyncAction<Unit, Array<Image>>({ ImgurApi.getSearch(query, sortIndex) }, { images ->
+                AsyncAction({ ImgurApi.getSearch(query, sortIndex) }, { images ->
                     galleryAdapter.items = images
                     rv_gallery.requestFocus()
-                }).exec()
+                })
                 return false
             }
 
