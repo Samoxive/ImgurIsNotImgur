@@ -1,23 +1,23 @@
 <resources>
-    <string name="app_name">INI</string>
+    <string name="app_name" translatable="false">ImgurIsNotImgur</string>
     <string name="authenticate">Authenticate</string>
     <string name="title_activity_authentication">AuthenticationActivity</string>
     <string name="please_sign_in">Please sign in through Imgur</string>
-    <string name="subreddit_act">&#xf281;</string>
+    <string name="subreddit_act" translatable="false">&#xf281;</string>
     <string name="subreddit_placeholder">Subreddit</string>
     <string name="subreddit_go">GO!</string>
     <string name="search_placeholder">Search</string>
-    <string name="gallery_act">&#xf015;</string>
+    <string name="gallery_act" translatable="false">&#xf015;</string>
     <string name="points">Points</string>
-    <string name="upload_act">&#xf030;</string>
-    <string name="profile_act">&#xf007;</string>
+    <string name="upload_act" translatable="false">&#xf030;</string>
+    <string name="profile_act" translatable="false">&#xf007;</string>
     <string name="created_at">Created At:</string>
     <string name="reputation">Reputation:</string>
     <string name="bio">Biography:</string>
     <string name="upload_photo_label">Upload a photo!</string>
     <string name="upload_from_photo_roll">Pick from gallery</string>
     <string name="upload_from_new_photo">Take a new photo</string>
-    <string name="search_act">&#xf002;</string>
+    <string name="search_act" translatable="false">&#xf002;</string>
     <string name="def_section">Default Section</string>
     <string name="def_sorting">Default Sorting</string>
     <string name="def_subreddit">Default Subreddit</string>
@@ -41,4 +41,5 @@
     <string name="quit">Quit</string>
     <!-- İyi akşamlar ozan bey -->
     <string name="image_title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+    <string name="app_launcher_name" translatable="false">ini</string>
 </resources>

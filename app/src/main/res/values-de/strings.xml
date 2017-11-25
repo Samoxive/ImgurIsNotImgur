@@ -1,19 +1,12 @@
 <resources>
-    <string name="app_name">INI</string>
     <string name="authenticate">Authentifizieren</string>
     <string name="title_activity_authentication">Authentifizierungsaktivität</string>
     <string name="please_sign_in">Bitte melden Sie sich über Imgur an</string>
-    <string name="subreddit_act">&#xf281;</string>
     <string name="subreddit_placeholder">Subreddit</string>
     <string name="subreddit_go">GEHEN!</string>
     <string name="search_placeholder">Suche</string>
-    <string name="gallery_act">&#xf015;</string>
-    <string name="upload_act">&#xf030;</string>
-    <string name="profile_act">&#xf007;</string>
-    <string name="upload_photo_label">Laden Sie ein Foto!</string>
     <string name="upload_from_photo_roll">Auswahl aus der Galerie</string>
     <string name="upload_from_new_photo">Nimm ein neues Foto</string>
-    <string name="search_act">&#xf002;</string>
     <string name="def_section">Standardabschnitt</string>
     <string name="def_sorting">Standardsortierung</string>
     <string name="def_subreddit">Standard-Unterreddit</string>
@@ -38,4 +31,8 @@
     <!-- WÖRK WÖRK WÖRK -->
     <string name="image_title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
     <string name="points">Punkte</string>
+    <string name="created_at">Hergestellt in:</string>
+    <string name="reputation">Ruf:</string>
+    <string name="bio">Biografie:</string>
+    <string name="upload_photo_label">Laden Sie ein Foto hoch!</string>
 </resources>
