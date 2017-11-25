@@ -13,11 +13,13 @@
     <string name="def_sorting">Varsayılan sıralama</string>
     <string name="def_subreddit">Varsayılan Subreddit</string>
     <string name="def_nsfw">Yetişkin İçerik</string>
+    <string name="section_default">Sıcak</string>
     <string-array name="section">
         <item>Sıcak</item>
         <item>En iyi</item>
         <item>Kullanıcı</item>
     </string-array>
+    <string name="sort_default">Viral</string>
     <string-array name="sort">
         <item>Viral</item>
         <item>Zaman</item>

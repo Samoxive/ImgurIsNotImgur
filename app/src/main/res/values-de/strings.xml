@@ -11,11 +11,13 @@
     <string name="def_sorting">Standardsortierung</string>
     <string name="def_subreddit">Standard-Unterreddit</string>
     <string name="def_nsfw">NSFW-Inhalt</string>
+    <string name="section_default">Heiß</string>
     <string-array name="section">
         <item>Heiß</item>
         <item>Beste</item>
         <item>Benutzer</item>
     </string-array>
+    <string name="sort_default">Viral</string>
     <string-array name="sort">
         <item>Viral</item>
         <item>Zeit</item>

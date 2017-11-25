@@ -2,13 +2,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ListPreference
-        android:defaultValue="Top"
+        android:defaultValue="@string/section_default"
         android:entries="@array/section"
         android:entryValues="@array/section"
         android:key="section"
         android:title="@string/def_section" />
     <ListPreference
-        android:defaultValue="Viral"
+        android:defaultValue="@string/sort_default"
         android:entries="@array/sort"
         android:entryValues="@array/sort"
         android:key="sort"
