@@ -70,9 +70,10 @@
                 android:id="@+id/commentsView"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
-                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                android:layout_marginTop="8dp"
                 android:orientation="vertical"
-                android:scrollbars="vertical"/>
+                android:scrollbars="vertical"
+                />
         </LinearLayout>
 
 
