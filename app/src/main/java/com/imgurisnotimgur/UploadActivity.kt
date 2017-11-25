@@ -1,12 +1,18 @@
 package com.imgurisnotimgur
 
+import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.imgurisnotimgur.api.ImgurApi
 import kotlinx.android.synthetic.main.activity_upload.*
 import kotlinx.android.synthetic.main.navigation_bar.*
+import java.io.ByteArrayOutputStream
 
 class UploadActivity : AppCompatActivity() {
     private val GALLERY_RESULT = 0
@@ -32,6 +38,36 @@ class UploadActivity : AppCompatActivity() {
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_RESULT)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK) {
+            AsyncAction<Unit, String>({
+                val uri = data?.data
+                val accessToken = SecretUtils.getSecrets(this).second.accessToken
+                val file = if (requestCode == GALLERY_RESULT) {
+                    contentResolver.openInputStream(uri).readBytes()
+                } else {
+                    val bitmap = data!!.extras.get("data") as Bitmap
+                    val stream = ByteArrayOutputStream()
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+                    stream.toByteArray()
+                }
+                return@AsyncAction ImgurApi.uploadImage(file, accessToken)
+            }, { imageUrl ->
+                val dialog = AlertDialog.Builder(this)
+                        .setMessage("Your image is uploaded! URL: $imageUrl")
+                        .setTitle("Upload Successful")
+                        .setPositiveButton("Ok", { _, _ ->  })
+                        .setNeutralButton("Open", { _, _ ->
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(imageUrl))
+                            startActivity(intent)
+                        })
+                        .setCancelable(true)
+                        .create()
+                dialog.show()
+            }).exec()
         }
     }
 
