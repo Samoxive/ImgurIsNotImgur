@@ -11,13 +11,13 @@ import java.util.concurrent.CountDownLatch
 
 class GalleryAdapter(items: Array<Image>, images: Array<ByteArray>, val activity: Activity) : RecyclerView.Adapter<GalleryViewHolder>() {
     var images: Array<ByteArray> = images
-        set(value) {
+        @Synchronized set(value) {
             field = value
             notifyDataSetChanged()
         }
 
     var items: Array<Image> = items
-        set(value) {
+        @Synchronized set(value) {
             field = value
             AsyncAction<Image, Array<ByteArray>>({ images ->
                 val size = images.size
@@ -49,7 +49,7 @@ class GalleryAdapter(items: Array<Image>, images: Array<ByteArray>, val activity
 
     fun onItemClick(position: Int) {
         val intent = Intent(activity, ImageDetailActivity::class.java)
-        intent.putExtra("imageResId", items[position])
+        intent.putExtra("image", items[position])
         activity.startActivity(intent)
     }
 }
