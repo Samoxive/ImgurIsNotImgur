@@ -164,9 +164,8 @@ class ImgurApi {
             return comments.toTypedArray()
         }
 
-        fun uploadImage(file: File, accessToken: String) {
-            val bytes = file.readBytes()
-            val base64Encoded = Base64.encodeToString(bytes, Base64.DEFAULT)
+        fun uploadImage(file: ByteArray, accessToken: String): String {
+            val base64Encoded = Base64.encodeToString(file, Base64.DEFAULT)
 
             val body = MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
@@ -181,7 +180,11 @@ class ImgurApi {
                     .build()
 
             val response = HttpUtils.sendRequest(request)
-            // do stuff with this
+            val responseBody = response.body()!!
+            val jsonResponse = responseBody.string()
+            val imgurJson = getJsonData(jsonResponse)
+            val imgurObject = JSONObject(imgurJson)
+            return imgurObject.optString("link", "N/A")
         }
     }
 }
