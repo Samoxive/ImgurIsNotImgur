@@ -15,12 +15,12 @@ import java.util.concurrent.Executors
 
 class SubredditGalleryAdapter(items: Array<SubredditImage>, images: Array<ByteArray>, val activity: Activity): RecyclerView.Adapter<SubredditGalleryViewHolder>() {
     var images: Array<ByteArray> = images
-        set(value) {
+        @Synchronized set(value) {
             field = value
             notifyDataSetChanged()
         }
     var items: Array<SubredditImage> = items
-        set(value) {
+        @Synchronized set(value) {
             field = value
             AsyncAction<SubredditImage, Array<ByteArray>>({ subredditImages ->
                 val size = subredditImages.size
