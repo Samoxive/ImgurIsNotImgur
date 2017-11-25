@@ -1,20 +1,14 @@
 <resources>
-    <string name="app_name">INI</string>
     <string name="authenticate">Yetkilendir</string>
     <string name="title_activity_authentication">YetkilendirmeAktivitesi</string>
     <string name="please_sign_in">Lütfen Imgur\'da oturum açın</string>
-    <string name="subreddit_act">&#xf281;</string>
     <string name="subreddit_placeholder">Subreddit</string>
     <string name="subreddit_go">Git!</string>
     <string name="search_placeholder">Ara</string>
-    <string name="gallery_act">&#xf015;</string>
     <string name="points">Puan</string>
-    <string name="upload_act">&#xf030;</string>
-    <string name="profile_act">&#xf007;</string>
     <string name="upload_photo_label">Bir fotoğraf yükle!</string>
     <string name="upload_from_photo_roll">Galeriden seç</string>
     <string name="upload_from_new_photo">Bir fotoğraf çek</string>
-    <string name="search_act">&#xf002;</string>
     <string name="def_section">Varsayılan bölüm</string>
     <string name="def_sorting">Varsayılan sıralama</string>
     <string name="def_subreddit">Varsayılan Subreddit</string>
@@ -40,5 +34,5 @@
     <string name="image_title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
     <string name="created_at">Oluşturulduğu Tarih:</string>
     <string name="reputation">Saygınlık:</string>
-    <string name="bio">Biografi:</string>
+    <string name="bio">Biyografi:</string>
 </resources>
