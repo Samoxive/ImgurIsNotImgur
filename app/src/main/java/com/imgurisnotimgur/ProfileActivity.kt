@@ -3,6 +3,7 @@ package com.imgurisnotimgur
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.view.Menu
 import android.view.MenuItem
 import com.imgurisnotimgur.api.ImgurApi
@@ -25,21 +26,22 @@ class ProfileActivity : AppCompatActivity() {
         searchAct.setOnClickListener(NavBarButtonHandler(this, SearchActivity::class.java))
         uploadAct.setOnClickListener(NavBarButtonHandler(this, UploadActivity::class.java))
 
-        nickname.setText("Samoxive")
-        bio.setText("Bio: Cool guy, likes kittens")
-        createdAt.setText("Created at: 02 Jan 2016")
-        reputation.setText("Reputation: 9001")
-        url.setText("https://samoxive.imgur.com")
+        nickname.text = "Samoxive"
+        bio.text = "Bio: Cool guy, likes kittens"
+        createdAt.text = "Created at: 02 Jan 2016"
+        reputation.text = "Reputation: 9001"
+        url.text = "https://samoxive.imgur.com"
 
         val accessTok = SecretUtils.getSecrets(this).second.accessToken
-        AsyncAction<String, Account>({ params ->
-            return@AsyncAction ImgurApi.getSelfAccount(accessTok)
-        }, { account ->
-            nickname.setText(account.username)
-            bio.setText("Bio: " +account.bio)
-            createdAt.setText("Created at: "+SimpleDateFormat("d MMM yyyy").format(Date(account.createdAt*1000)))
-            reputation.setText("Reputation: "+account.reputation.toString())
-            url.setText("https://"+account.username+".imgur.com")
+        AsyncAction<String, Account>({ ImgurApi.getSelfAccount(accessTok) }, { account ->
+            val creationDate = Date(account.createdAt * 1000)
+            val dateFormat = DateFormat.getLongDateFormat(this)
+            val timeString = dateFormat.format(creationDate)
+            nickname.text = account.username
+            bio.text = "Bio: ${account.bio}"
+            createdAt.text = "Created at: $timeString"
+            reputation.text = "Reputation: ${account.reputation}"
+            url.text = "https://${account.username}.imgur.com"
         }).exec()
 
     }
