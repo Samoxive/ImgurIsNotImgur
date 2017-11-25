@@ -38,4 +38,7 @@
     <string name="quit">Çıkış</string>
     <!-- How old are you?! -->
     <string name="image_title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+    <string name="created_at">"Oluşturulduğu Tarih: "</string>
+    <string name="reputation">"Saygınlık: "</string>
+    <string name="bio">"Biografi: "</string>
 </resources>
