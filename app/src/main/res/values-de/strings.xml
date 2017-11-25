@@ -37,4 +37,5 @@
     <string name="quit">Beenden</string>
     <!-- WÖRK WÖRK WÖRK -->
     <string name="image_title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+    <string name="points">Punkte</string>
 </resources>
