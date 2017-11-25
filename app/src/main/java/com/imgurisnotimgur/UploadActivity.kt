@@ -22,6 +22,8 @@ class UploadActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upload)
 
+        val selectPictureString = getString(R.string.select_picture)
+
         uploadAct.isEnabled = false
         subredditAct.setOnClickListener(NavBarButtonHandler(this, SubredditActivity::class.java))
         galleryAct.setOnClickListener(NavBarButtonHandler(this, GalleryActivity::class.java))
@@ -37,7 +39,7 @@ class UploadActivity : AppCompatActivity() {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_RESULT)
+            startActivityForResult(Intent.createChooser(intent, selectPictureString), GALLERY_RESULT)
         }
     }
 
@@ -56,9 +58,11 @@ class UploadActivity : AppCompatActivity() {
                 }
                 return@AsyncAction ImgurApi.uploadImage(file, accessToken)
             }, { imageUrl ->
+                val imageUploadedString = getString(R.string.image_uploaded)
+                val imageUploadSuccessString = getString(R.string.image_uploaded_success)
                 val dialog = AlertDialog.Builder(this)
-                        .setMessage("Your image is uploaded! URL: $imageUrl")
-                        .setTitle("Upload Successful")
+                        .setMessage("$imageUploadedString $imageUrl")
+                        .setTitle(imageUploadSuccessString)
                         .setPositiveButton("Ok", { _, _ ->  })
                         .setNeutralButton("Open", { _, _ ->
                             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(imageUrl))
