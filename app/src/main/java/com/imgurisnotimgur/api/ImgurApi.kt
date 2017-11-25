@@ -1,9 +1,14 @@
 package com.imgurisnotimgur.api
 
+import android.util.Base64
 import com.google.gson.Gson
+import com.imgurisnotimgur.SecretUtils
 import com.imgurisnotimgur.entities.*
+import okhttp3.MultipartBody
+import okhttp3.Request
 import okhttp3.ResponseBody
 import org.json.JSONObject
+import java.io.File
 import java.security.InvalidParameterException
 
 class ImgurApi {
@@ -157,6 +162,26 @@ class ImgurApi {
             }
 
             return comments.toTypedArray()
+        }
+
+        fun uploadImage(file: File, accessToken: String) {
+            val bytes = file.readBytes()
+            val base64Encoded = Base64.encodeToString(bytes, Base64.DEFAULT)
+
+            val body = MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("image", base64Encoded)
+                    .build()
+
+            val request = Request.Builder()
+                    .url("https://api.imgur.com/3/image")
+                    .header("Authorization", "Client-ID $clientId")
+                    .header("Authorization", "Bearer $accessToken")
+                    .post(body)
+                    .build()
+
+            val response = HttpUtils.sendRequest(request)
+            // do stuff with this
         }
     }
 }
