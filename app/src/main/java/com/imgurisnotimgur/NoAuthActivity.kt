@@ -10,7 +10,6 @@ class NoAuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_no_auth)
-        title = "Imgur Authentication"
 
         authButton.setOnClickListener {
             val intent = Intent(this@NoAuthActivity, AuthenticationActivity::class.java)
