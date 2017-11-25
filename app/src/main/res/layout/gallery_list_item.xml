@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:scrollHorizontally="false"
                     android:text="@string/image_title"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/colorTitle"
                     android:textSize="12sp" />
 
                 <android.support.constraint.ConstraintLayout

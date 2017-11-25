@@ -31,7 +31,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="FanOfCats98"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorTitle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:scrollHorizontally="false"
                     android:text=""
-                    android:textColor="@color/colorAccent" />
+                    android:textColor="@color/colorTitle" />
 
                 <TextView
                     android:id="@+id/commentPoints"

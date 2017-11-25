@@ -10,4 +10,5 @@
     <color name="colorDownvote">#EE4444</color>
     <color name="colorDownvotePB">#572424</color>
     <color name="colorName">#4E76C9</color>
+    <color name="colorTitle">#222</color>
 </resources>

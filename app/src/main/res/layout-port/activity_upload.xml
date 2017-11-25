@@ -22,7 +22,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="64dp"
         android:text="@string/upload_photo_label"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorTitle"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

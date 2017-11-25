@@ -29,7 +29,7 @@
                 android:layout_marginTop="16dp"
                 android:scrollHorizontally="false"
                 android:text="Look at this cool cat photo!"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorTitle"
                 android:textSize="20sp" />
 
             <android.support.constraint.ConstraintLayout
