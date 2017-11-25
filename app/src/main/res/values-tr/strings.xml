@@ -35,9 +35,10 @@
     <string name="created_at">Oluşturulduğu Tarih:</string>
     <string name="reputation">Saygınlık:</string>
     <string name="bio">Biyografi:</string>
-    <string name="select_picture">Fotoğraf Seç</string>
-    <string name="image_uploaded">Fotoğraf başarıyla gönderildi! URL:</string>
-    <string name="image_uploaded_success">Gönderim Başarılı</string>
     <string name="ok">Tamam</string>
     <string name="open">Aç</string>
+    <string name="select_picture">Fotoğraf Seç</string>
+    <string name="image_uploaded">Fotoğraf başarıyla gönderildi! URL:</string>
+    <string name="image_uploaded_success">Gönderim Başarılı!</string>
+
 </resources>

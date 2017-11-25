@@ -13,7 +13,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:textSize="48sp"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Samoxive" />
@@ -58,6 +58,8 @@
         android:layout_marginStart="8dp"
         tools:text="https://samoxive.imgur.com"
         android:autoLink="web"
+        android:textColor="@color/colorText"
+        android:textColorLink="@color/colorText"
         app:layout_constraintBottom_toTopOf="@+id/includeNavBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

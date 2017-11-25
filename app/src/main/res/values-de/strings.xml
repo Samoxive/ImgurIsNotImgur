@@ -35,4 +35,9 @@
     <string name="reputation">Ruf:</string>
     <string name="bio">Biografie:</string>
     <string name="upload_photo_label">Laden Sie ein Foto hoch!</string>
+    <string name="ok">OK</string>
+    <string name="open">Öffnen</string>
+    <string name="select_picture">Wählen bild aus</string>
+    <string name="image_uploaded">Dein Bild ist hochgeladen! URL:</string>
+    <string name="image_uploaded_success">Hochladen erfolgreich!</string>
 </resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--#181817-->
-
+    <!--
     <color name="colorPrimary">#85BF25</color>
     <color name="colorPrimaryDark">#38491B</color>
     <color name="colorAccent">#a82a23</color>
@@ -10,4 +10,15 @@
     <color name="colorDownvote">#EE4444</color>
     <color name="colorDownvotePB">#572424</color>
     <color name="colorName">#4E76C9</color>
+    -->
+
+    <color name="colorPrimary">#263238</color>
+    <color name="colorPrimaryDark">#212121</color>
+    <color name="colorAccent">#7cb342</color>
+    <color name="colorText">#b71c1c</color>
+    <color name="colorUpvote">#7cb342</color>
+    <color name="colorUpovotePB">#1b5e20</color>
+    <color name="colorDownvote">#f44336</color>
+    <color name="colorDownvotePB">#3e2723</color>
+    <color name="colorName">#5c6bc0</color>
 </resources>
