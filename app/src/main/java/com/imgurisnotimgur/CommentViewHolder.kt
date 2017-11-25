@@ -3,13 +3,18 @@ package com.imgurisnotimgur
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
+import com.imgurisnotimgur.entities.Comment
 
 class CommentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    // TODO(sam): Fill this class to actually hold custom comments
+    val author = itemView.findViewById<TextView>(R.id.commentAuthor)
+    val time = itemView.findViewById<TextView>(R.id.commentTime)
+    val content = itemView.findViewById<TextView>(R.id.commentContent)
+    val points = itemView.findViewById<TextView>(R.id.commentPoints)
 
-    init {
-        itemView.findViewById<TextView>(R.id.commentContent).setText("Cat ipsum dolor sit amet, hunt anything that moves or hopped up on goofballs hide when guests come over." +
-                " Hide when guests come over intrigued by the shower, or stare at ceiling climb leg for stretch and use lap as chair." +
-                " Hunt anything that moves flop over, leave dead animals as gifts for chase imaginary bugs, chase mice for stare at ceiling yet hopped up on goofballs.")
+    fun bind(comment: Comment) {
+        author.text = comment.author
+        time.text = comment.createdAt.toString()
+        content.text = comment.content
+        points.text = "${comment.points} Points"
     }
 }

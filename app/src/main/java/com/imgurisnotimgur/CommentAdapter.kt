@@ -3,10 +3,17 @@ package com.imgurisnotimgur
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.imgurisnotimgur.entities.Comment
 
-class CommentAdapter(val items: IntArray): RecyclerView.Adapter<CommentViewHolder>() {
-    override fun onBindViewHolder(holder: CommentViewHolder?, position: Int) {
-        // TODO(sam): Fill this to actually attach custom comments
+class CommentAdapter(items: Array<Comment>): RecyclerView.Adapter<CommentViewHolder>() {
+    var items: Array<Comment> = items
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
+    override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
+        holder.bind(items[position])
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
