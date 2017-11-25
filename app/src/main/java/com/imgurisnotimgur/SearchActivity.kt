@@ -38,43 +38,24 @@ class SearchActivity : AppCompatActivity() {
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         val sortPreference = preferences.getString("sort", "Hot")
-        val sectionPreference = preferences.getString("section", "Viral")
-        val nsfwEnabled = preferences.getBoolean("nsfw_enabled", false)
 
-        val sectionIndex = PreferenceUtils.findIndexOfValue(PreferenceUtils.sectionEntries, sectionPreference)
         val sortIndex = PreferenceUtils.findIndexOfValue(PreferenceUtils.sortEntries, sortPreference)
 
-        //sectionSpinner.setSelection(sectionIndex, true)
         sortSpinner.setSelection(sortIndex, true)
 
         val galleryAdapter = GalleryAdapter(arrayOf(), arrayOf(), this)
         rv_gallery.adapter = galleryAdapter
-        /*sectionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // We shouldn't need to do anything here as user can't select an empty entry anyways
-            }
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val sortPosition = sortSpinner.selectedItemPosition
-
-                AsyncAction<Triple<Int, Int, Boolean>, Array<Image>>({ params ->
-                    val (section, sort, nsfwEnabled) = params[0]
-                    return@AsyncAction ImgurApi.getSearch(searchInput.query.toString(), section, sort, nsfwEnabled)
-                }, { images -> galleryAdapter.items = images }).exec(Triple(position, sortPosition, nsfwEnabled))
-            }
-        }*/
         sortSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 // We shouldn't need to do anything here as user can't select an empty entry anyways
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val sectionPosition = sectionSpinner.selectedItemPosition
-
-                AsyncAction<Triple<Int, Int, Boolean>, Array<Image>>({ params ->
-                    val (section, sort, nsfwEnabled) = params[0]
-                    return@AsyncAction ImgurApi.getSearch(searchInput.query.toString(),section, sort, nsfwEnabled)
-                }, { images -> galleryAdapter.items = images }).exec(Triple(sectionPosition, position, nsfwEnabled))
+                AsyncAction<Int, Array<Image>>({ params ->
+                    val (sort) = params
+                    return@AsyncAction ImgurApi.getSearch(searchInput.query.toString(), sort)
+                }, { images -> galleryAdapter.items = images }).exec(position)
             }
         }
 
@@ -82,12 +63,12 @@ class SearchActivity : AppCompatActivity() {
 
         searchInput.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                galleryAdapter.items = arrayOf()
-                rv_gallery.requestFocus()
-                AsyncAction<Triple<Int, Int, Boolean>, Array<Image>>({ params ->
-                    val (section, sort, nsfwEnabled) = params[0]
-                    return@AsyncAction ImgurApi.getSearch(query,section, sort, nsfwEnabled)
-                }, { images -> galleryAdapter.items = images }).exec(Triple(sectionIndex, sortIndex, nsfwEnabled))
+                AsyncAction<Int, Array<Image>>({ params ->
+                    val (sort) = params
+                    return@AsyncAction ImgurApi.getSearch(query, sort)
+                }, { images -> galleryAdapter.items = images
+                    rv_gallery.requestFocus()
+                }).exec(sortIndex)
                 return false
             }
 

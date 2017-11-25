@@ -184,7 +184,7 @@ class ImgurApi {
             // do stuff with this
         }
 
-        fun getSearch(search: String, section: Int, sort: Int, nsfwEnabled: Boolean): Array<Image> {
+        fun getSearch(search: String, sort: Int): Array<Image> {
 
             val sortParam = when (sort) {
                 0 -> "viral"
@@ -200,8 +200,6 @@ class ImgurApi {
                 6 -> "all"
                 else -> ""
             }
-
-            val pageParam = 1
 
             var url = "https://api.imgur.com/3/gallery/search/$sortParam/"
             if (!timeWindow.equals("")) {
@@ -230,11 +228,6 @@ class ImgurApi {
                                 it.is_album
                         )
                     }
-
-            // Do you know why that filter is there? Let me tell you. It's because imgur api is a shameless liar.
-            // So, appearently sometimes gallery items don't have a cover image despite them being an album
-            // Because of that, if we want null safety, we need to get rid of albums without a cover image
-            // And that folks is why you don't blindly trust API documentation.
 
             return galleryImages.toTypedArray()
         }
