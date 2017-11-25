@@ -9,6 +9,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.SearchView
+import com.imgurisnotimgur.api.ImgurApi
+import com.imgurisnotimgur.entities.Image
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.gallery_preferences.*
 import kotlinx.android.synthetic.main.navigation_bar.*
@@ -37,40 +39,55 @@ class SearchActivity : AppCompatActivity() {
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         val sortPreference = preferences.getString("sort", "Hot")
         val sectionPreference = preferences.getString("section", "Viral")
+        val nsfwEnabled = preferences.getBoolean("nsfw_enabled", false)
 
         val sectionIndex = PreferenceUtils.findIndexOfValue(PreferenceUtils.sectionEntries, sectionPreference)
         val sortIndex = PreferenceUtils.findIndexOfValue(PreferenceUtils.sortEntries, sortPreference)
 
-        sectionSpinner.setSelection(sectionIndex, true)
+        //sectionSpinner.setSelection(sectionIndex, true)
         sortSpinner.setSelection(sortIndex, true)
 
         val galleryAdapter = GalleryAdapter(arrayOf(), arrayOf(), this)
         rv_gallery.adapter = galleryAdapter
-        sectionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+        /*sectionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 // We shouldn't need to do anything here as user can't select an empty entry anyways
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent!!.getItemAtPosition(position) as String
+                val sortPosition = sortSpinner.selectedItemPosition
+
+                AsyncAction<Triple<Int, Int, Boolean>, Array<Image>>({ params ->
+                    val (section, sort, nsfwEnabled) = params[0]
+                    return@AsyncAction ImgurApi.getSearch(searchInput.query.toString(), section, sort, nsfwEnabled)
+                }, { images -> galleryAdapter.items = images }).exec(Triple(position, sortPosition, nsfwEnabled))
             }
-        }
+        }*/
         sortSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 // We shouldn't need to do anything here as user can't select an empty entry anyways
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent!!.getItemAtPosition(position) as String
+                val sectionPosition = sectionSpinner.selectedItemPosition
+
+                AsyncAction<Triple<Int, Int, Boolean>, Array<Image>>({ params ->
+                    val (section, sort, nsfwEnabled) = params[0]
+                    return@AsyncAction ImgurApi.getSearch(searchInput.query.toString(),section, sort, nsfwEnabled)
+                }, { images -> galleryAdapter.items = images }).exec(Triple(sectionPosition, position, nsfwEnabled))
             }
         }
 
         searchInput.setOnClickListener { searchInput.isIconified = false }
 
         searchInput.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
+            override fun onQueryTextSubmit(query: String): Boolean {
                 galleryAdapter.items = arrayOf()
                 rv_gallery.requestFocus()
+                AsyncAction<Triple<Int, Int, Boolean>, Array<Image>>({ params ->
+                    val (section, sort, nsfwEnabled) = params[0]
+                    return@AsyncAction ImgurApi.getSearch(query,section, sort, nsfwEnabled)
+                }, { images -> galleryAdapter.items = images }).exec(Triple(sectionIndex, sortIndex, nsfwEnabled))
                 return false
             }
 
