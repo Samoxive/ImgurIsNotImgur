@@ -14,7 +14,6 @@ import java.security.InvalidParameterException
 class ImgurApi {
     companion object {
         val clientId = "7333a4b592aab44"
-        val clientSecret = "07dd18a125014c99422a3de9e33cfb50ff5a1785"
         val thumbnailMode = "m"
 
         private fun getJsonData(jsonResponse: String): String {
@@ -104,8 +103,8 @@ class ImgurApi {
                     .map {
                  Image (
                          if (it.is_album) { it.cover } else { it.id },
-                         it.title,
-                         it.account_url,
+                         if (it.title != null) { it.title } else { "" },
+                         if (it.account_url != null) { it.account_url } else { "" },
                          it.points,
                          it.datetime,
                          if (it.is_album) { it.id } else { "" },
@@ -188,7 +187,6 @@ class ImgurApi {
         }
 
         fun getSearch(search: String, sort: Int): Array<Image> {
-
             val sortParam = when (sort) {
                 0 -> "viral"
                 1 -> "time"
@@ -206,7 +204,7 @@ class ImgurApi {
 
             var url = "https://api.imgur.com/3/gallery/search/$sortParam/"
             if (!timeWindow.equals("")) {
-                url += "$timeWindow"
+                url += timeWindow
             }
 
             url += "?q=$search"
@@ -223,8 +221,8 @@ class ImgurApi {
                     .map {
                         Image (
                                 if (it.is_album) { it.cover } else { it.id },
-                                it.title,
-                                it.account_url,
+                                if (it.title != null) { it.title } else { "" },
+                                if (it.account_url != null) { it.account_url } else { "" },
                                 it.points,
                                 it.datetime,
                                 if (it.is_album) { it.id } else { "" },

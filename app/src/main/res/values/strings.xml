@@ -22,11 +22,13 @@
     <string name="def_sorting">Default Sorting</string>
     <string name="def_subreddit">Default Subreddit</string>
     <string name="def_nsfw">NSFW Content</string>
+    <string name="section_default">Hot</string>
     <string-array name="section">
         <item>Hot</item>
         <item>Top</item>
         <item>User</item>
     </string-array>
+    <string name="sort_default">Viral</string>
     <string-array name="sort">
         <item>Viral</item>
         <item>Time</item>

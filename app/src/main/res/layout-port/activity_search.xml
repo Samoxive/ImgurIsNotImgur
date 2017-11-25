@@ -11,17 +11,19 @@
         layout="@layout/search_preferences"
         android:layout_width="match_parent"
         android:layout_height="@dimen/gallery_preferences_height"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/searchInput" />
 
     <SearchView
         android:id="@+id/searchInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/includePrefs" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!--
     The attribute "app:layout_constraintHeight_default" coupled with "layout_height="0dp"
@@ -31,12 +33,13 @@
         android:id="@+id/rv_gallery"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/includeNavBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="wrap"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchInput"
+        app:layout_constraintTop_toBottomOf="@+id/includePrefs"
         app:spanCount="2" />
 
     <include
