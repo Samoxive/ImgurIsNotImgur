@@ -26,10 +26,14 @@ class ProfileActivity : AppCompatActivity() {
         searchAct.setOnClickListener(NavBarButtonHandler(this, SearchActivity::class.java))
         uploadAct.setOnClickListener(NavBarButtonHandler(this, UploadActivity::class.java))
 
+        val bioString = getString(R.string.bio)
+        val createdAtString = getString(R.string.created_at)
+        val reputationString = getString(R.string.reputation)
+
         nickname.text = "Samoxive"
-        bio.text = "Bio: Cool guy, likes kittens"
-        createdAt.text = "Created at: 02 Jan 2016"
-        reputation.text = "Reputation: 9001"
+        bio.text = "$bioString Cool guy, likes kittens"
+        createdAt.text = "$createdAtString 02 Jan 2016"
+        reputation.text = "$reputationString 9001"
         url.text = "https://samoxive.imgur.com"
 
         val accessTok = SecretUtils.getSecrets(this).second.accessToken
@@ -38,9 +42,9 @@ class ProfileActivity : AppCompatActivity() {
             val dateFormat = DateFormat.getLongDateFormat(this)
             val timeString = dateFormat.format(creationDate)
             nickname.text = account.username
-            bio.text = "Bio: ${account.bio}"
-            createdAt.text = "Created at: $timeString"
-            reputation.text = "Reputation: ${account.reputation}"
+            bio.text = "$bioString ${account.bio}"
+            createdAt.text = "$createdAtString $timeString"
+            reputation.text = "$reputationString ${account.reputation}"
             url.text = "https://${account.username}.imgur.com"
         }).exec()
 
