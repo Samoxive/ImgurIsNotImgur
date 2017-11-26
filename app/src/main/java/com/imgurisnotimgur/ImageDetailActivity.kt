@@ -23,7 +23,7 @@ class ImageDetailActivity : AppCompatActivity() {
 
         detailImageTitle.text = image.title
         detailImageAuthor.text = image.username
-        detailImageDate.text = image.createdAt.toString()
+        detailImageDate.text = ImageUtils.getTimeString(this, image.createdAt)
 
         AsyncAction({ ImgurApi.getImageFile(image.id) }, { file ->
             val bitmap = ImageUtils.getScaledDownBitmap(file)

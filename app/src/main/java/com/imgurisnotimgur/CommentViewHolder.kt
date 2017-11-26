@@ -14,7 +14,7 @@ class CommentViewHolder(itemView: View, val adapter: CommentAdapter) : RecyclerV
     fun bind(comment: Comment) {
         val pointsString = adapter.activity.getString(R.string.points)
         author.text = comment.author
-        time.text = comment.createdAt.toString()
+        time.text = ImageUtils.getTimeString(adapter.activity, comment.createdAt)
         content.text = comment.content
         points.text = "${comment.points} $pointsString"
     }
