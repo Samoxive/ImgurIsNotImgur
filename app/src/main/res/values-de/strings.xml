@@ -42,4 +42,10 @@
     <string name="select_picture">Wählen bild aus</string>
     <string name="image_uploaded">Dein Bild ist hochgeladen! URL:</string>
     <string name="image_uploaded_success">Hochladen erfolgreich!</string>
+    <string name="years">J</string>
+    <string name="months">Mo</string>
+    <string name="days">T</string>
+    <string name="seconds">S</string>
+    <string name="minutes">M</string>
+    <string name="hours">U</string>
 </resources>
