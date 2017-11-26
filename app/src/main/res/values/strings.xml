@@ -50,4 +50,10 @@
     <string name="image_uploaded">Your image is uploaded! URL:</string>
     <string name="image_uploaded_success">Upload Successful!</string>
     <string name="username" translatable="false">FanOfCats98</string>
+    <string name="seconds">s</string>
+    <string name="minutes">m</string>
+    <string name="hours">hr</string>
+    <string name="days">d</string>
+    <string name="months">mo</string>
+    <string name="years">yr</string>
 </resources>

@@ -42,5 +42,11 @@
     <string name="select_picture">Fotoğraf Seç</string>
     <string name="image_uploaded">Fotoğraf başarıyla gönderildi! URL:</string>
     <string name="image_uploaded_success">Gönderim Başarılı!</string>
+    <string name="seconds">sn</string>
+    <string name="minutes">dk</string>
+    <string name="hours">sa</string>
+    <string name="days">gün</string>
+    <string name="months">ay</string>
+    <string name="years">yıl</string>
 
 </resources>
