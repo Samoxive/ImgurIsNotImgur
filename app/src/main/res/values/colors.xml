@@ -17,5 +17,5 @@
     <color name="colorDownvote">#f44336</color>
     <color name="colorDownvotePB">#3e2723</color>
     <color name="colorName">#5c6bc0</color>
-    <color name="colorTitle">#222</color>
+    <color name="colorTitle">#212121</color>
 </resources>
