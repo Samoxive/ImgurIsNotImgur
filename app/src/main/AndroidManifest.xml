@@ -11,8 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-            android:label="@string/app_launcher_name" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_launcher_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,6 +30,12 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ImageDetailActivity" />
         <activity android:name=".SubredditImageDetail" />
+
+        <provider
+            android:name=".data.ImgurProvider"
+            android:authorities="com.imgurisnotimgur"
+            android:enabled="true"
+            android:exported="true"></provider>
     </application>
 
 </manifest>
