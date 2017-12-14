@@ -1,7 +1,5 @@
 package com.imgurisnotimgur.data
 
-import android.content.ContentResolver
-import android.content.ContentUris
 import android.net.Uri
 
 class ImgurContract {
@@ -10,5 +8,6 @@ class ImgurContract {
         val BASE_CONTENT_URI = Uri.parse("content://$CONTENT_AUTHORITY")
         val PATH_THUMBNAIL = "thumbnail"
         val PATH_IMAGE = "image"
+        val PATH_COMMENT = "comment"
     }
 }

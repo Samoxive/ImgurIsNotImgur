@@ -14,6 +14,8 @@ class ImgurProvider : ContentProvider() {
         val THUMBNAIL_WITH_ID = 101
         val IMAGE = 322
         val IMAGE_WITH_ID = 323
+        val COMMENT = 42
+        val COMMENT_WITH_IMAGE_ID = 7
 
         fun createUriMatcher(): UriMatcher {
             val matcher = UriMatcher(UriMatcher.NO_MATCH)
@@ -23,6 +25,8 @@ class ImgurProvider : ContentProvider() {
             matcher.addURI(authority, ImgurContract.PATH_IMAGE, IMAGE)
             matcher.addURI(authority, "${ImgurContract.PATH_THUMBNAIL}/*", THUMBNAIL_WITH_ID)
             matcher.addURI(authority, "${ImgurContract.PATH_IMAGE}/*", IMAGE_WITH_ID)
+            matcher.addURI(authority, ImgurContract.PATH_COMMENT, COMMENT)
+            matcher.addURI(authority, "${ImgurContract.PATH_COMMENT}/*", COMMENT_WITH_IMAGE_ID)
 
             return matcher
         }
@@ -41,8 +45,10 @@ class ImgurProvider : ContentProvider() {
         val (table, sel, selArgs) = when (matcher.match(uri)) {
             THUMBNAIL_WITH_ID -> Triple(ThumbnailRecord.TABLE_NAME, "_id = ?", arrayOf(uri.lastPathSegment))
             IMAGE_WITH_ID -> Triple(ImageRecord.TABLE_NAME, "_id = ?", arrayOf(uri.lastPathSegment))
+            COMMENT_WITH_IMAGE_ID -> Triple(CommentRecord.TABLE_NAME, "imageid = ?", arrayOf(uri.lastPathSegment))
             THUMBNAIL -> Triple(ThumbnailRecord.TABLE_NAME, selection, selectionArgs)
             IMAGE -> Triple(ImageRecord.TABLE_NAME, selection, selectionArgs)
+            COMMENT -> Triple(CommentRecord.TABLE_NAME, selection, selectionArgs)
             else -> throw UnsupportedOperationException("Unknown uri")
         }
 
@@ -54,6 +60,7 @@ class ImgurProvider : ContentProvider() {
         val table = when (matcher.match(uri)) {
             THUMBNAIL -> ThumbnailRecord.TABLE_NAME
             IMAGE -> ImageRecord.TABLE_NAME
+            COMMENT -> CommentRecord.TABLE_NAME
             else -> throw UnsupportedOperationException("Invalid uri")
         }
 
@@ -71,8 +78,10 @@ class ImgurProvider : ContentProvider() {
         val (table, sel, selArgs) = when (matcher.match(uri)) {
             THUMBNAIL_WITH_ID -> Triple(ThumbnailRecord.TABLE_NAME, "_id = ?", arrayOf(uri.lastPathSegment))
             IMAGE_WITH_ID -> Triple(ImageRecord.TABLE_NAME, "_id = ?", arrayOf(uri.lastPathSegment))
+            COMMENT_WITH_IMAGE_ID -> Triple(CommentRecord.TABLE_NAME, "imageid = ?", arrayOf(uri.lastPathSegment))
             THUMBNAIL -> Triple(ThumbnailRecord.TABLE_NAME, selection, selectionArgs)
             IMAGE -> Triple(ImageRecord.TABLE_NAME, selection, selectionArgs)
+            COMMENT -> Triple(CommentRecord.TABLE_NAME, selection, selectionArgs)
             else -> throw UnsupportedOperationException("Unknown uri")
         }
         
@@ -84,12 +93,33 @@ class ImgurProvider : ContentProvider() {
         val (table, sel, selArgs) = when (matcher.match(uri)) {
             THUMBNAIL_WITH_ID -> Triple(ThumbnailRecord.TABLE_NAME, "_id = ?", arrayOf(uri.lastPathSegment))
             IMAGE_WITH_ID -> Triple(ImageRecord.TABLE_NAME, "_id = ?", arrayOf(uri.lastPathSegment))
+            COMMENT_WITH_IMAGE_ID -> Triple(CommentRecord.TABLE_NAME, "imageid = ?", arrayOf(uri.lastPathSegment))
             THUMBNAIL -> Triple(ThumbnailRecord.TABLE_NAME, selection, selectionArgs)
             IMAGE -> Triple(ImageRecord.TABLE_NAME, selection, selectionArgs)
+            COMMENT -> Triple(CommentRecord.TABLE_NAME, selection, selectionArgs)
             else -> throw UnsupportedOperationException("Unknown uri")
         }
 
         val database = db!!.writableDatabase
         return database.updateWithOnConflict(table, values, sel, selArgs, SQLiteDatabase.CONFLICT_REPLACE)
+    }
+
+    override fun bulkInsert(uri: Uri, values: Array<out ContentValues>): Int {
+        val match = matcher.match(uri)
+        if (match != COMMENT) {
+            return -1
+        }
+
+        val database = db!!.writableDatabase
+        database.beginTransaction()
+
+        for (value in values) {
+            database.insert(CommentRecord.TABLE_NAME, null, value)
+        }
+
+        database.setTransactionSuccessful()
+        database.endTransaction()
+
+        return values.size
     }
 }

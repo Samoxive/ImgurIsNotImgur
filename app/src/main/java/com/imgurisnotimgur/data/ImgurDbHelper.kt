@@ -13,11 +13,13 @@ class ImgurDbHelper(val context: Context): SQLiteOpenHelper(context, name, null,
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(ThumbnailRecord.CREATE_TABLE_SQL)
         db.execSQL(ImageRecord.CREATE_TABLE_SQL)
+        db.execSQL(CommentRecord.CREATE_TABLE_SQL)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE ${ThumbnailRecord.TABLE_NAME};")
         db.execSQL("DROP TABLE ${ImageRecord.TABLE_NAME};")
+        db.execSQL("DROP TABLE ${CommentRecord.TABLE_NAME};")
 
         onCreate(db)
     }
