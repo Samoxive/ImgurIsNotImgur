@@ -86,7 +86,7 @@ class ImgurProvider : ContentProvider() {
         }
         
         val database = db!!.readableDatabase
-        return database.query(table, projection, sel, selArgs, null, null, null)
+        return database.query(table, projection, sel, selArgs, null, null, sortOrder)
     }
 
     override fun update(uri: Uri, values: ContentValues?, selection: String?, selectionArgs: Array<String>?): Int {

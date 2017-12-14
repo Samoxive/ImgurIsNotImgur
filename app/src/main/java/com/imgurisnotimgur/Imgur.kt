@@ -51,7 +51,7 @@ class Imgur {
 
         fun getComments(contentResolver: ContentResolver, image: Image): Array<Comment> {
             val id = if (image.isAlbum) { image.albumId } else { image.id }
-            val cursor = contentResolver.query(CommentRecord.buildImageCommentsUri(id), CommentRecord.COLUMNS, null, null, null)
+            val cursor = contentResolver.query(CommentRecord.buildImageCommentsUri(id), CommentRecord.COLUMNS, null, null, "${CommentRecord.COLUMN_POINTS} DESC")
 
             if (cursor != null && cursor.count > 0) {
                 val comments = CommentRecord.getCommentsFromCursor(cursor)
