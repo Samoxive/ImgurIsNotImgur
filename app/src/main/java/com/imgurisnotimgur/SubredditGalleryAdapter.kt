@@ -29,7 +29,7 @@ class SubredditGalleryAdapter(items: Array<SubredditImage>, images: Array<ByteAr
                 val pool = AsyncAction.pool
                 for (i in value.indices) {
                     pool.submit {
-                        resultArray[i] = ImgurApi.getThumbnailFile(value[i].id)
+                        resultArray[i] = Imgur.getThumbnailFile(activity.contentResolver, value[i].id)
                         latch.countDown()
                     }
                 }

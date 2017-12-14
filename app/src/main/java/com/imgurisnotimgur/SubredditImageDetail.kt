@@ -20,7 +20,7 @@ class SubredditImageDetail : AppCompatActivity() {
         if (image != null) {
             subredditDetailImageTitle.text = image.title
             subredditDetailImageTime.text = ImageUtils.getTimeString(this, image.createdAt)
-            AsyncAction({ ImgurApi.getImageFile(image.id) }, { file ->
+            AsyncAction({ Imgur.getImageFile(contentResolver, image.id) }, { file ->
                 val bitmap = ImageUtils.getScaledDownBitmap(file)
                 subredditDetailImage.setImageBitmap(bitmap)
             })
