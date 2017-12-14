@@ -21,7 +21,7 @@ class ImageRecord(val id: String, val file: ByteArray) {
                 "$COLUMN_FILE BLOB NOT NULL\n" +
                 ");"
 
-        fun buildImageUri(id: Long): Uri = ContentUris.withAppendedId(CONTENT_URI, id)
+        fun buildImageUri(id: String): Uri = CONTENT_URI.buildUpon().appendPath(id).build()
         fun getInstanceFromCursor(cursor: Cursor): ImageRecord = ImageRecord(cursor.getString(0),
                                                                              cursor.getBlob(1))
     }

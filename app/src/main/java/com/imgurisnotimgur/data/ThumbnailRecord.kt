@@ -25,7 +25,7 @@ class ThumbnailRecord(val id: String, val file: ByteArray) {
                 ");"
 
 
-        fun buildThumbnailUri(id: Long): Uri = ContentUris.withAppendedId(CONTENT_URI, id)
+        fun buildThumbnailUri(id: String): Uri = CONTENT_URI.buildUpon().appendPath(id).build()
         fun getInstanceFromCursor(cursor: Cursor): ThumbnailRecord = ThumbnailRecord(cursor.getString(0),
                                                                                      cursor.getBlob(1))
     }
