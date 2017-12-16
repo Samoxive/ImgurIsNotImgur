@@ -22,11 +22,15 @@ class Imgur {
             }
 
             val imageFile = ImgurApi.getImageFile(imageId)
-            val dbValues = ContentValues()
-            dbValues.put(ImageRecord.COLUMN_ID, imageId)
-            dbValues.put(ImageRecord.COLUMN_FILE, imageFile)
 
-            contentResolver.insert(ImageRecord.CONTENT_URI, dbValues)
+            if (imageFile.size < 1024 * 1024 * 5) {
+                val dbValues = ContentValues()
+                dbValues.put(ImageRecord.COLUMN_ID, imageId)
+                dbValues.put(ImageRecord.COLUMN_FILE, imageFile)
+
+                contentResolver.insert(ImageRecord.CONTENT_URI, dbValues)
+            }
+
             return imageFile
         }
 
