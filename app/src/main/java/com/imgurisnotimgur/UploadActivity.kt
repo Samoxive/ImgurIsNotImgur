@@ -3,20 +3,37 @@ package com.imgurisnotimgur
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.view.Menu
 import android.view.MenuItem
 import com.imgurisnotimgur.api.ImgurApi
 import kotlinx.android.synthetic.main.activity_upload.*
 import kotlinx.android.synthetic.main.navigation_bar.*
-import java.io.ByteArrayOutputStream
+import android.provider.MediaStore
+import android.support.v4.content.FileProvider
+import android.util.Log
+import java.io.*
+
 
 class UploadActivity : AppCompatActivity() {
     private val GALLERY_RESULT = 0
     private val CAMERA_RESULT = 1
+
+    fun getTempFileUri() = Uri.parse("${getExternalFilesDir(Environment.DIRECTORY_PICTURES).absolutePath}/temp.jpg")
+
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        val stream = FileOutputStream(getTempFileUri().toString())
+        val writer = OutputStreamWriter(stream)
+        writer.write("")
+        writer.flush()
+        writer.close()
+        stream.close()
+        return File(getTempFileUri().toString())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +48,17 @@ class UploadActivity : AppCompatActivity() {
         profileAct.setOnClickListener(NavBarButtonHandler(this, ProfileActivity::class.java))
 
         cameraUpload.setOnClickListener {
-            val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(cameraIntent, CAMERA_RESULT)
+            try {
+                val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+                val photoFile = createImageFile()
+                val photoURI = FileProvider.getUriForFile(this,
+                        "com.imgurisnotimgur.fileprovider",
+                        photoFile)
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                startActivityForResult(cameraIntent, CAMERA_RESULT)
+            } catch (e: Exception) {
+                Log.wtf("Upload", e)
+            }
         }
 
         pickUpload.setOnClickListener {
@@ -46,17 +72,30 @@ class UploadActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
             AsyncAction({
-                val uri = data?.data
-                val accessToken = SecretUtils.getSecrets(this).second.accessToken
                 val file = if (requestCode == GALLERY_RESULT) {
-                    contentResolver.openInputStream(uri).readBytes()
+                    contentResolver.openInputStream(data?.data).readBytes()
                 } else {
-                    // Currently we upload the thumbnail camera sends, replace this to upload the actual file
-                    val bitmap = data!!.extras.get("data") as Bitmap
-                    val stream = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
-                    stream.toByteArray()
+                    try {
+                        val stream = FileInputStream(File(getTempFileUri().toString()))
+                        val buffer = arrayListOf<Byte>()
+
+                        var b: Int = stream.read()
+                        while (b != -1) {
+                            buffer.add(b.toByte())
+                            b = stream.read()
+                        }
+
+                        buffer.toByteArray()
+                    } catch (e: Exception) {
+                        null
+                    }
                 }
+
+                if (file == null) {
+                    throw Exception("Something something")
+                }
+
+                val accessToken = SecretUtils.getSecrets(this).second.accessToken
                 return@AsyncAction ImgurApi.uploadImage(file, accessToken)
             }, { imageUrl ->
                 val imageUploadedString = getString(R.string.image_uploaded)
