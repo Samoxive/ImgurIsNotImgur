@@ -2,6 +2,7 @@ package com.imgurisnotimgur
 
 import android.content.ContentResolver
 import android.content.ContentValues
+import android.database.Cursor
 import com.imgurisnotimgur.api.ImgurApi
 import com.imgurisnotimgur.data.CommentRecord
 import com.imgurisnotimgur.data.ImageRecord
@@ -11,9 +12,7 @@ import com.imgurisnotimgur.entities.Image
 
 class Imgur {
     companion object {
-        fun getImageFile(contentResolver: ContentResolver, imageId: String): ByteArray {
-            val cursor = contentResolver.query(ImageRecord.buildImageUri(imageId), ImageRecord.COLUMNS, null, null, null)
-
+        fun getImageFile(contentResolver: ContentResolver, cursor: Cursor?, imageId: String): ByteArray {
             if (cursor != null && cursor.count > 0) {
                 cursor.moveToFirst()
                 val imageFile = cursor.getBlob(1)
@@ -53,9 +52,8 @@ class Imgur {
             return thumbFile
         }
 
-        fun getComments(contentResolver: ContentResolver, image: Image): Array<Comment> {
+        fun getComments(contentResolver: ContentResolver, cursor: Cursor?, image: Image): Array<Comment> {
             val id = if (image.isAlbum) { image.albumId } else { image.id }
-            val cursor = contentResolver.query(CommentRecord.buildImageCommentsUri(id), CommentRecord.COLUMNS, null, null, "${CommentRecord.COLUMN_POINTS} DESC")
 
             if (cursor != null && cursor.count > 0) {
                 val comments = CommentRecord.getCommentsFromCursor(cursor)
