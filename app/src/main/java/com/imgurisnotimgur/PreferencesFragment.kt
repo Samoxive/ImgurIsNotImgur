@@ -5,6 +5,7 @@ import android.preference.ListPreference
 import android.preference.Preference
 import android.preference.PreferenceFragment
 import android.preference.PreferenceManager
+import android.widget.Toast
 import com.imgurisnotimgur.data.ImgurContract
 
 class PreferencesFragment : PreferenceFragment(), Preference.OnPreferenceChangeListener {
@@ -24,6 +25,8 @@ class PreferencesFragment : PreferenceFragment(), Preference.OnPreferenceChangeL
         val clearCacheButton = findPreference("clear")
         clearCacheButton.setOnPreferenceClickListener {
             contentResolver.delete(ImgurContract.BASE_CONTENT_URI.buildUpon().appendPath("everything").build(), null, null)
+            //TODO: Context
+            Toast.makeText(context.applicationContext,getString(R.string.clear_cache_toast),Toast.LENGTH_LONG)
             true
         }
 
