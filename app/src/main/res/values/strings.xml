@@ -56,4 +56,5 @@
     <string name="days">d</string>
     <string name="months">mo</string>
     <string name="years">yr</string>
+    <string name="clear_cache">Clear Cache</string>
 </resources>
