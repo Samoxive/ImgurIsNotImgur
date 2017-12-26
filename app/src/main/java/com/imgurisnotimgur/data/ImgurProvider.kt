@@ -16,6 +16,7 @@ class ImgurProvider : ContentProvider() {
         val IMAGE_WITH_ID = 323
         val COMMENT = 42
         val COMMENT_WITH_IMAGE_ID = 7
+        val EVERYTHING = 1337
 
         fun createUriMatcher(): UriMatcher {
             val matcher = UriMatcher(UriMatcher.NO_MATCH)
@@ -27,6 +28,7 @@ class ImgurProvider : ContentProvider() {
             matcher.addURI(authority, "${ImgurContract.PATH_IMAGE}/*", IMAGE_WITH_ID)
             matcher.addURI(authority, ImgurContract.PATH_COMMENT, COMMENT)
             matcher.addURI(authority, "${ImgurContract.PATH_COMMENT}/*", COMMENT_WITH_IMAGE_ID)
+            matcher.addURI(authority, "everything", EVERYTHING)
 
             return matcher
         }
@@ -41,6 +43,11 @@ class ImgurProvider : ContentProvider() {
     }
     override fun getType(uri: Uri): String = ""
 
+    fun deletThis() {
+        val database = db!!.writableDatabase
+        db?.onUpgrade(database, 0, 0)
+    }
+
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
         val (table, sel, selArgs) = when (matcher.match(uri)) {
             THUMBNAIL_WITH_ID -> Triple(ThumbnailRecord.TABLE_NAME, "_id = ?", arrayOf(uri.lastPathSegment))
@@ -49,6 +56,10 @@ class ImgurProvider : ContentProvider() {
             THUMBNAIL -> Triple(ThumbnailRecord.TABLE_NAME, selection, selectionArgs)
             IMAGE -> Triple(ImageRecord.TABLE_NAME, selection, selectionArgs)
             COMMENT -> Triple(CommentRecord.TABLE_NAME, selection, selectionArgs)
+            EVERYTHING -> {
+                deletThis()
+                return 9001
+            }
             else -> throw UnsupportedOperationException("Unknown uri")
         }
 
