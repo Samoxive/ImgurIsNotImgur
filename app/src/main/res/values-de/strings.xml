@@ -48,4 +48,5 @@
     <string name="seconds">S</string>
     <string name="minutes">M</string>
     <string name="hours">U</string>
+    <string name="clear_cache">Cache Löschen</string>
 </resources>
