@@ -23,4 +23,6 @@
         android:defaultValue="false"
         android:key="nsfw_enabled"
         android:title="@string/def_nsfw" />
+    <Preference android:title="@string/clear_cache"
+        android:key="clear" />
 </PreferenceScreen>
