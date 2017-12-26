@@ -5,6 +5,7 @@ import android.preference.ListPreference
 import android.preference.Preference
 import android.preference.PreferenceFragment
 import android.preference.PreferenceManager
+import com.imgurisnotimgur.data.ImgurContract
 
 class PreferencesFragment : PreferenceFragment(), Preference.OnPreferenceChangeListener {
 
@@ -14,11 +15,17 @@ class PreferencesFragment : PreferenceFragment(), Preference.OnPreferenceChangeL
 
         addPreferencesFromResource(R.xml.pref_general)
 
+        val contentResolver = activity.contentResolver
         val globalPreferences = PreferenceManager.getDefaultSharedPreferences(activity.applicationContext)
 
         val sectionPreference = findPreference("section")
         val sortPreference = findPreference("sort")
         val subredditNamePreference = findPreference("subreddit")
+        val clearCacheButton = findPreference("clear")
+        clearCacheButton.setOnPreferenceClickListener {
+            contentResolver.delete(ImgurContract.BASE_CONTENT_URI.buildUpon().appendPath("everything").build(), null, null)
+            true
+        }
 
         sectionPreference.onPreferenceChangeListener = this
         sortPreference.onPreferenceChangeListener = this
