@@ -2,6 +2,7 @@ package com.imgurisnotimgur
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Notification
 import android.content.Intent
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
@@ -98,7 +99,7 @@ class UploadActivity : AppCompatActivity() {
                 val accessToken = SecretUtils.getSecrets(this).second.accessToken
                 return@AsyncAction ImgurApi.uploadImage(file, accessToken)
             }, { imageUrl ->
-                val imageUploadedString = getString(R.string.image_uploaded)
+                /*val imageUploadedString = getString(R.string.image_uploaded)
                 val imageUploadSuccessString = getString(R.string.image_uploaded_success)
                 val okString = getString(R.string.ok)
                 val openString = getString(R.string.open)
@@ -112,7 +113,8 @@ class UploadActivity : AppCompatActivity() {
                         })
                         .setCancelable(true)
                         .create()
-                dialog.show()
+                dialog.show()*/
+                com.imgurisnotimgur.Notification.uploadedNotification(this)
             })
         }
     }
