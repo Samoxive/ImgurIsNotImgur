@@ -19,20 +19,8 @@ class GalleryAdapter(items: Array<Image>, images: Array<ByteArray>, val activity
     var items: Array<Image> = items
         @Synchronized set(value) {
             field = value
-            AsyncAction({
-                val size = value.size
-                val latch = CountDownLatch(size)
-                val resultArray = Array(size, { byteArrayOf() })
-                val pool = AsyncAction.pool
-                for (i in value.indices) {
-                    pool.submit {
-                        resultArray[i] = Imgur.getThumbnailFile(activity.contentResolver, value[i].id)
-                        latch.countDown()
-                    }
-                }
-                latch.await()
-                return@AsyncAction resultArray
-            }, { imageFiles -> images = imageFiles })
+            AsyncAction({ Imgur.getThumbnailFiles(activity.contentResolver, value) },
+                    { imageFiles -> images = imageFiles })
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder {

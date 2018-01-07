@@ -9,6 +9,8 @@ import com.imgurisnotimgur.data.ImageRecord
 import com.imgurisnotimgur.data.ThumbnailRecord
 import com.imgurisnotimgur.entities.Comment
 import com.imgurisnotimgur.entities.Image
+import com.imgurisnotimgur.entities.SubredditImage
+import java.util.concurrent.CountDownLatch
 
 class Imgur {
     companion object {
@@ -75,6 +77,27 @@ class Imgur {
 
             contentResolver.bulkInsert(CommentRecord.CONTENT_URI, commentsDb)
             return comments
+        }
+
+        fun getThumbnailFiles(contentResolver: ContentResolver, images: Array<Image>): Array<ByteArray> =
+                getThumbnailFilesFromMetadata(contentResolver, images.map { it.id })
+
+        fun getThumbnailFiles(contentResolver: ContentResolver, images: Array<SubredditImage>): Array<ByteArray> =
+                getThumbnailFilesFromMetadata(contentResolver, images.map { it.id })
+
+        private fun getThumbnailFilesFromMetadata(contentResolver: ContentResolver, ids: List<String>): Array<ByteArray> {
+            val size = ids.size
+            val latch = CountDownLatch(size)
+            val resultArray = Array(size, { byteArrayOf() })
+            val pool = AsyncAction.pool
+            for (i in ids.indices) {
+                pool.submit {
+                    resultArray[i] = Imgur.getThumbnailFile(contentResolver, ids[i])
+                    latch.countDown()
+                }
+            }
+            latch.await()
+            return resultArray
         }
     }
 }
