@@ -1,5 +1,6 @@
 package com.imgurisnotimgur
 
+import android.annotation.TargetApi
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -12,103 +13,83 @@ import android.os.Build
 import android.support.v4.app.NotificationCompat
 import android.support.v4.content.ContextCompat
 
-/**
- * Created by ozankaraali on 6.01.2018.
- */
 class Notification {
     companion object {
-    private val WATER_REMINDER_NOTIFICATION_ID = 1138
-    private val WATER_REMINDER_PENDING_INTENT_ID = 3417
-    private val WATER_REMINDER_NOTIFICATION_CHANNEL_ID = "reminder_notification_channel"
-    private val ACTION_IGNORE_PENDING_INTENT_ID = 14
-    private val ACTION_DRINK_PENDING_INTENT_ID = 1
+    private val NOTIFICATION_ID = 1998
+    private val NOTIFICATION_CHANNEL_ID = "reminder_notification_channel"
+    private val ACTION_COPY_PENDING_INTENT_ID = 98
+    private val PENDING_INTENT_ID = 38
 
-    fun clearAllNotifications(context: Context) {
-        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.cancelAll()
-    }
+        /*fun clearAllNotifications(context: Context) {
+            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.cancelAll()
+        }*/
 
-    fun uploadedNotification(context: Context) {
+    @TargetApi(Build.VERSION_CODES.O)
+    fun uploadedNotification(context: Context, url: String) {
 
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val mChannel = NotificationChannel(
-                    WATER_REMINDER_NOTIFICATION_CHANNEL_ID,
+                    NOTIFICATION_CHANNEL_ID,
                     "Primary",
                     NotificationManager.IMPORTANCE_HIGH)
 
             notificationManager.createNotificationChannel(mChannel)
         }
 
-        val notificationBuilder = NotificationCompat.Builder(context, WATER_REMINDER_NOTIFICATION_CHANNEL_ID)
+        val notificationBuilder = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
         notificationBuilder
                 .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                //.setLargeIcon(largeIcon(context))
+                .setSmallIcon(R.mipmap.ic_launcher_foreground)
+                .setLargeIcon(largeIcon(context))
                 .setContentTitle(context.getString(R.string.image_uploaded_success))
                 .setContentText(context.getString(R.string.image_uploaded))
-                //.setStyle(NotificationCompat.BigTextStyle().bigText(
-                //        context.getString(R.string.charging_reminder_notification_body)))
+                //.setStyle(NotificationCompat.BigTextStyle().bigText(context.getString(R.string.charging_reminder_notification_body)))
                 .setDefaults(Notification.DEFAULT_VIBRATE)
-                //.setContentIntent(contentIntent(context))
+                .setContentIntent(contentIntent(context))
                 .setAutoCancel(true)
-                //.addAction(drinkWaterAction(context))
-                //.addAction(ignoreReminderAction(context))
+                .addAction(copyToClipboard(context, url))
+                //TODO: .addAction(openWithINIorBrowser(context,url))
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             notificationBuilder.priority = NotificationCompat.PRIORITY_HIGH
         }
 
-        notificationManager.notify(WATER_REMINDER_NOTIFICATION_ID, notificationBuilder.build())
+        notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
     }
 
-    /*private fun ignoreReminderAction(context: Context): NotificationCompat.Action {
+    private fun copyToClipboard(context: Context, url: String): NotificationCompat.Action {
 
-        val ignoreReminderIntent = Intent(context, WaterReminderIntentService::class.java)
-        ignoreReminderIntent.action = ReminderTasks.ACTION_DISMISS_NOTIFICATION
+        val copyToClipboardIntent = Intent(context, NotificationIntents::class.java)
+        copyToClipboardIntent.action = "copy-to-clipboard"
+        copyToClipboardIntent.putExtra("copyUrl",url)
 
         val ignoreReminderPendingIntent = PendingIntent.getService(
                 context,
-                ACTION_IGNORE_PENDING_INTENT_ID,
-                ignoreReminderIntent,
+                ACTION_COPY_PENDING_INTENT_ID,
+                copyToClipboardIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT)
 
-        return NotificationCompat.Action(R.drawable.ic_cancel_black_24px,
-                "No, thanks.",
+        return NotificationCompat.Action(R.drawable.ic_content_copy_black_24dp,
+                "Copy to Clipboard",
                 ignoreReminderPendingIntent)
-    }
-
-    private fun drinkWaterAction(context: Context): NotificationCompat.Action {
-
-        val incrementWaterCountIntent = Intent(context, WaterReminderIntentService::class.java)
-        incrementWaterCountIntent.action = ReminderTasks.ACTION_INCREMENT_WATER_COUNT
-
-        val incrementWaterPendingIntent = PendingIntent.getService(
-                context,
-                ACTION_DRINK_PENDING_INTENT_ID,
-                incrementWaterCountIntent,
-                PendingIntent.FLAG_CANCEL_CURRENT)
-
-        return NotificationCompat.Action(R.drawable.ic_local_drink_black_24px,
-                "I did it!",
-                incrementWaterPendingIntent)
     }
 
     private fun contentIntent(context: Context): PendingIntent {
         val startActivityIntent = Intent(context, MainActivity::class.java)
         return PendingIntent.getActivity(
                 context,
-                WATER_REMINDER_PENDING_INTENT_ID,
+                PENDING_INTENT_ID,
                 startActivityIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT)
     }
 
     private fun largeIcon(context: Context): Bitmap {
-
         val res = context.resources
-        return BitmapFactory.decodeResource(res, R.drawable.ic_local_drink_black_24px)
-    }*/
+        return BitmapFactory.decodeResource(res, R.mipmap.ic_launcher_foreground)
+    }
     }
 }
 

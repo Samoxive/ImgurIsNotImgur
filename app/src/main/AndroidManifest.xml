@@ -32,6 +32,11 @@
         <activity android:name=".ImageDetailActivity" />
         <activity android:name=".SubredditImageDetail" />
 
+        <service
+            android:name=".NotificationIntents"
+            android:exported="false">
+        </service>
+
         <provider
             android:name=".data.ImgurProvider"
             android:authorities="com.imgurisnotimgur"

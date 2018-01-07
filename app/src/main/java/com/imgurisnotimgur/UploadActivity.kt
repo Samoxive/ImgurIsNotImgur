@@ -99,22 +99,7 @@ class UploadActivity : AppCompatActivity() {
                 val accessToken = SecretUtils.getSecrets(this).second.accessToken
                 return@AsyncAction ImgurApi.uploadImage(file, accessToken)
             }, { imageUrl ->
-                /*val imageUploadedString = getString(R.string.image_uploaded)
-                val imageUploadSuccessString = getString(R.string.image_uploaded_success)
-                val okString = getString(R.string.ok)
-                val openString = getString(R.string.open)
-                val dialog = AlertDialog.Builder(this)
-                        .setMessage("$imageUploadedString $imageUrl")
-                        .setTitle(imageUploadSuccessString)
-                        .setPositiveButton(okString, { _, _ ->  })
-                        .setNeutralButton(openString, { _, _ ->
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(imageUrl))
-                            startActivity(intent)
-                        })
-                        .setCancelable(true)
-                        .create()
-                dialog.show()*/
-                com.imgurisnotimgur.Notification.uploadedNotification(this)
+                com.imgurisnotimgur.Notification.uploadedNotification(this,imageUrl)
             })
         }
     }

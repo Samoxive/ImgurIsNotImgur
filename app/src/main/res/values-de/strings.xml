@@ -40,7 +40,7 @@
     <string name="ok">OK</string>
     <string name="open">Öffnen</string>
     <string name="select_picture">Wählen bild aus</string>
-    <string name="image_uploaded">Dein Bild ist hochgeladen! URL:</string>
+    <string name="image_uploaded">Dein Bild ist hochgeladen!</string>
     <string name="image_uploaded_success">Hochladen erfolgreich!</string>
     <string name="years">J</string>
     <string name="months">Mo</string>

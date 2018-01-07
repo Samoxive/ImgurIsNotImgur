@@ -47,7 +47,7 @@
     <string name="ok">OK</string>
     <string name="open">Open</string>
     <string name="select_picture">Select Picture</string>
-    <string name="image_uploaded">Your image is uploaded! URL:</string>
+    <string name="image_uploaded">Your image is uploaded!</string>
     <string name="image_uploaded_success">Upload Successful!</string>
     <string name="username" translatable="false">FanOfCats98</string>
     <string name="seconds">s</string>
