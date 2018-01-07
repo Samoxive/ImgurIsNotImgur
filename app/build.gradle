@@ -8,7 +8,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.imgurisnotimgur"
-        minSdkVersion 26
+        minSdkVersion 25
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -21,6 +21,8 @@ android {
         }
     }
     buildToolsVersion '26.0.2'
+    productFlavors {
+    }
 }
 
 dependencies {
@@ -35,6 +37,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
     compile 'com.google.code.gson:gson:2.8.2'
+    compile 'com.firebase:firebase-jobdispatcher:0.8.5'
     implementation 'com.android.support:cardview-v7:26.1.0'
 }
 
