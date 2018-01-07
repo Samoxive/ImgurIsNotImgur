@@ -27,15 +27,7 @@ class GalleryActivity : AppCompatActivity() {
         profileAct.setOnClickListener(NavBarButtonHandler(this, ProfileActivity::class.java))
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val sortPreference = preferences.getString("sort", "Hot")
-        val sectionPreference = preferences.getString("section", "Viral")
-        val nsfwEnabled = preferences.getBoolean("nsfw_enabled", false)
-
-        val sectionEntries = resources.getStringArray(R.array.section)
-        val sortEntries = resources.getStringArray(R.array.sort)
-
-        val sectionIndex = PreferenceUtils.findIndexOfValue(sectionEntries, sectionPreference)
-        val sortIndex = PreferenceUtils.findIndexOfValue(sortEntries, sortPreference)
+        val (sectionIndex, sortIndex, nsfwEnabled) = PreferenceUtils.getGalleryParameters(preferences, resources)
 
         sectionSpinner.setSelection(sectionIndex, true)
         sortSpinner.setSelection(sortIndex, true)

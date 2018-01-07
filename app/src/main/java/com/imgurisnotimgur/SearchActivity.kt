@@ -27,11 +27,7 @@ class SearchActivity : AppCompatActivity() {
         profileAct.setOnClickListener(NavBarButtonHandler(this, ProfileActivity::class.java))
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val sortPreferenceDefault = resources.getString(R.string.sort_default)
-        val sortPreference = preferences.getString("sort", sortPreferenceDefault)
-
-        val sortEntries = resources.getStringArray(R.array.sort)
-        val sortIndex = PreferenceUtils.findIndexOfValue(sortEntries, sortPreference)
+        val (_, sortIndex, _) = PreferenceUtils.getGalleryParameters(preferences, resources)
 
         sortSpinner.setSelection(sortIndex, true)
 
