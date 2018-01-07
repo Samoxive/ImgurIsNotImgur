@@ -42,7 +42,6 @@
             android:authorities="com.imgurisnotimgur"
             android:enabled="true"
             android:exported="true" />
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.imgurisnotimgur.fileprovider"
@@ -52,6 +51,13 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <receiver
+            android:name=".background.ChargingListener">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
