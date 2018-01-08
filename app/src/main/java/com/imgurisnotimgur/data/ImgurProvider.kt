@@ -16,6 +16,7 @@ class ImgurProvider : ContentProvider() {
         val IMAGE_WITH_ID = 323
         val COMMENT = 42
         val COMMENT_WITH_IMAGE_ID = 7
+        val BOOKMARK = 1837837
         val EVERYTHING = 1337
 
         fun createUriMatcher(): UriMatcher {
@@ -28,6 +29,7 @@ class ImgurProvider : ContentProvider() {
             matcher.addURI(authority, "${ImgurContract.PATH_IMAGE}/*", IMAGE_WITH_ID)
             matcher.addURI(authority, ImgurContract.PATH_COMMENT, COMMENT)
             matcher.addURI(authority, "${ImgurContract.PATH_COMMENT}/*", COMMENT_WITH_IMAGE_ID)
+            matcher.addURI(authority, ImgurContract.PATH_BOOKMARK, BOOKMARK)
             matcher.addURI(authority, "everything", EVERYTHING)
 
             return matcher
@@ -72,6 +74,7 @@ class ImgurProvider : ContentProvider() {
             THUMBNAIL -> ThumbnailRecord.TABLE_NAME
             IMAGE -> ImageRecord.TABLE_NAME
             COMMENT -> CommentRecord.TABLE_NAME
+            BOOKMARK -> BookmarkRecords.TABLE_NAME
             else -> throw UnsupportedOperationException("Invalid uri")
         }
 
@@ -93,6 +96,7 @@ class ImgurProvider : ContentProvider() {
             THUMBNAIL -> Triple(ThumbnailRecord.TABLE_NAME, selection, selectionArgs)
             IMAGE -> Triple(ImageRecord.TABLE_NAME, selection, selectionArgs)
             COMMENT -> Triple(CommentRecord.TABLE_NAME, selection, selectionArgs)
+            BOOKMARK -> Triple(BookmarkRecords.TABLE_NAME, selection, selectionArgs)
             else -> throw UnsupportedOperationException("Unknown uri")
         }
         

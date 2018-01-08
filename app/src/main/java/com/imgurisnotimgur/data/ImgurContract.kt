@@ -9,5 +9,6 @@ class ImgurContract {
         val PATH_THUMBNAIL = "thumbnail"
         val PATH_IMAGE = "image"
         val PATH_COMMENT = "comment"
+        val PATH_BOOKMARK = "bookmark"
     }
 }
