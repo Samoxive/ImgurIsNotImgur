@@ -10,6 +10,6 @@ class Image (
         val username: String,
         val points: Long,
         val createdAt: Long,
-        val albumId: String,
+        val albumId: String?,
         val isAlbum: Boolean
 ): Parcelable
