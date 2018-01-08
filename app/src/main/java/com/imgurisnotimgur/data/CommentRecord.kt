@@ -3,6 +3,7 @@ package com.imgurisnotimgur.data
 import android.database.Cursor
 import android.net.Uri
 import com.imgurisnotimgur.entities.Comment
+import com.imgurisnotimgur.entities.Image
 
 class CommentRecord {
     companion object {
@@ -56,5 +57,7 @@ class CommentRecord {
 
             return array
         }
+
+        fun getIdThingy(image: Image) = if (image.isAlbum) image.albumId else image.id
     }
 }
