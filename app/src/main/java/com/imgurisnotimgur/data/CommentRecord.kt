@@ -27,7 +27,7 @@ class CommentRecord {
                 COLUMN_AUTHOR
         )
 
-        val CREATE_TABLE_SQL = "CREATE TABLE comment (\n" +
+        val CREATE_TABLE_SQL = "CREATE TABLE IF NOT EXISTS $TABLE_NAME (\n" +
                 "$COLUMN_ID INTEGER PRIMARY KEY,\n" +
                 "$COLUMN_IMAGEID TEXT,\n" +
                 "$COLUMN_CONTENT TEXT,\n" +
