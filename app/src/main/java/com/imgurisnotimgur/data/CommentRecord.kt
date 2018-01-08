@@ -58,6 +58,6 @@ class CommentRecord {
             return array
         }
 
-        fun getIdThingy(image: Image) = if (image.isAlbum) image.albumId else image.id
+        fun getIdThingy(image: Image) = if (image.isAlbum) image.albumId!! else image.id
     }
 }
