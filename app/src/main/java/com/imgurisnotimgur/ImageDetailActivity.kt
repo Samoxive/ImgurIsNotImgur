@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.StaggeredGridLayoutManager
+import android.view.Menu
+import android.view.MenuItem
+import com.imgurisnotimgur.data.BookmarkRecords
 import com.imgurisnotimgur.data.CommentRecord
 import com.imgurisnotimgur.data.ImageRecord
 import com.imgurisnotimgur.entities.Image
@@ -18,6 +21,7 @@ class ImageDetailActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<C
     val IMAGE_LOADER = 33
     var _image: Image? = null
     var imageId: String? = null
+    var menu: Menu? = null
     var commentAdapter: CommentAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +69,48 @@ class ImageDetailActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<C
                 ImageUtils.getScaledDownBitmap(imageFile)
             }, { detailImageView.setImageBitmap(it) })
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_detail, menu)
+        this.menu = menu
+        fetchBookmarkStatus()
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (isBookmarked()) {
+            contentResolver.delete(BookmarkRecords.CONTENT_URI, "${BookmarkRecords.COLUMN_IMAGEID} = ?", arrayOf(_image!!.id))
+            fetchBookmarkStatus()
+        } else {
+            val values = BookmarkRecords.getContentValueFrom(_image!!)
+            contentResolver.insert(BookmarkRecords.CONTENT_URI, values)
+            fetchBookmarkStatus()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    fun fetchBookmarkStatus() {
+        AsyncAction({
+            isBookmarked()
+        }, { bookmarked ->
+            val bookmarkButton = menu!!.getItem(0)
+            if (!bookmarked) {
+                bookmarkButton.setIcon(R.drawable.nonbookmarked)
+                bookmarkButton.setVisible(true)
+            } else {
+                bookmarkButton.setIcon(R.drawable.bookmarked)
+                bookmarkButton.setVisible(true)
+            }
+        })
+    }
+
+    private fun isBookmarked(): Boolean {
+        return BookmarkRecords.getInstancesFromCursor(
+                contentResolver.query(BookmarkRecords.CONTENT_URI, BookmarkRecords.COLUMNS, null, null, null)
+        ).filter {
+            it.id == _image!!.id
+        }.firstOrNull() != null
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>?) {}
