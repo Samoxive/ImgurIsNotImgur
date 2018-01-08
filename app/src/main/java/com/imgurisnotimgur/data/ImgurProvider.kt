@@ -58,6 +58,7 @@ class ImgurProvider : ContentProvider() {
             THUMBNAIL -> Triple(ThumbnailRecord.TABLE_NAME, selection, selectionArgs)
             IMAGE -> Triple(ImageRecord.TABLE_NAME, selection, selectionArgs)
             COMMENT -> Triple(CommentRecord.TABLE_NAME, selection, selectionArgs)
+            BOOKMARK -> Triple(BookmarkRecords.TABLE_NAME, selection, selectionArgs)
             EVERYTHING -> {
                 deletThis()
                 return 9001
