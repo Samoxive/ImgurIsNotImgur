@@ -50,4 +50,6 @@
     <string name="years">yıl</string>
     <string name="clear_cache">Önbelleği Temizle</string>
     <string name="clear_cache_toast">Önbellek temizlendi</string>
+    <string name="new_comments">Yeni yorumlar var!</string>
+    <string name="new_comments_in">\"%s\" resiminde yeni yorumlar var</string>
 </resources>

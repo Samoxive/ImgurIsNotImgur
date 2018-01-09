@@ -58,4 +58,6 @@
     <string name="years">yr</string>
     <string name="clear_cache">Clear Cache</string>
     <string name="clear_cache_toast">Cache Cleared</string>
+    <string name="new_comments">New comments!</string>
+    <string name="new_comments_in">There are new comments in image \"%s\"</string>
 </resources>
