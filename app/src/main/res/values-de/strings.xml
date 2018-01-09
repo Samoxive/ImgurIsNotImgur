@@ -50,4 +50,6 @@
     <string name="hours">U</string>
     <string name="clear_cache">Cache Löschen</string>
     <string name="clear_cache_toast">Cache gelöscht</string>
+    <string name="new_comments">Neue Kommentare!</string>
+    <string name="new_comments_in">There are new comments in image %s</string>
 </resources>
