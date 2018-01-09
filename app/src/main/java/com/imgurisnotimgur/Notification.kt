@@ -51,8 +51,8 @@ class Notification {
                     .setContentText("There are new comments in image: \"${image.title}\"")
                     .setContentIntent(contentIntent(context))
                     .setAutoCancel(true)
-                    .addAction(unbookmark(context, image))
                     .addAction(viewComments(context, image))
+                    .addAction(unbookmark(context, image))
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
                 builder.priority = PRIORITY_HIGH
