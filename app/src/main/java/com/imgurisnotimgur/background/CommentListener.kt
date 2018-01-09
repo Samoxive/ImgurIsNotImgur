@@ -52,7 +52,6 @@ class CommentListener: JobService() {
     }
 
     private fun sendNewCommentsNotification(image: Image) {
-        // TODO(sam): Send notification
-        Notification.uploadedNotification(applicationContext, image.title)
+        Notification.newCommentNotification(applicationContext, image)
     }
 }
