@@ -242,8 +242,16 @@ class ImgurApi {
             val jsonResponse = body.string()
             val gson = Gson()
             val imgurJson = getJsonData(jsonResponse)
-            val imgurImage = gson.fromJson(imgurJson, Image::class.java)
-            return Image(imgurImage.id, id, SecretUtils.getSecrets(context).second.accountUsername, imgurImage.points, imgurImage.createdAt, imgurImage.albumId, imgurImage.isAlbum)
+            val imgurImage = gson.fromJson(imgurJson, ImgurGalleryAlbum::class.java)
+            return Image (
+                    if (imgurImage.is_album) { imgurImage.cover } else { imgurImage.id },
+                    if (imgurImage.title != null) { imgurImage.title } else { imgurImage.id },
+                    SecretUtils.getSecrets(context).second.accountUsername,
+                    imgurImage.points,
+                    imgurImage.datetime,
+                    if (imgurImage.is_album) { imgurImage.id } else { "" },
+                    imgurImage.is_album
+            )
         }
     }
 }
