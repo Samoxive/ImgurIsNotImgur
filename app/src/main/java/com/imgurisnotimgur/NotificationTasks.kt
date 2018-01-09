@@ -8,6 +8,8 @@ import com.imgurisnotimgur.api.ImgurApi
 
 class NotificationTasks {
     companion object {
+        val VIEW_COMMENTS = "view-comments"
+        val UNBOOKMARK = "unbookmark"
         val COPY_TO_CLIPBOARD = "copy-to-clipboard"
         val OPEN_WITH_INI = "open-with-ini"
         val SHARE_URL = "share-url"
