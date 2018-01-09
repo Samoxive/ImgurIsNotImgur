@@ -83,7 +83,7 @@ class Notification {
 
             val openWithIniIntent = Intent(context, NotificationIntents::class.java)
             openWithIniIntent.action = NotificationTasks.OPEN_WITH_INI
-            openWithIniIntent.putExtra("openUrl", url)
+            openWithIniIntent.putExtra("copyUrl", url)
 
             val openIniPendingIntent = PendingIntent.getService(
                     context,
@@ -99,7 +99,7 @@ class Notification {
 
             val shareIntent = Intent(context, NotificationIntents::class.java)
             shareIntent.action = NotificationTasks.SHARE_URL
-            shareIntent.putExtra("shareUrl", url)
+            shareIntent.putExtra("copyUrl", url)
 
             val openIniPendingIntent = PendingIntent.getService(
                     context,
