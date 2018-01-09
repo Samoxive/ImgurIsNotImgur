@@ -21,7 +21,8 @@ class ImgurApi {
             if (responseObject.getBoolean("success")) {
                 return responseObject.get("data").toString()
             } else {
-                throw InvalidParameterException("Invalid Imgur Response")
+                // Horrible hack, fixme
+                return "[]"
             }
         }
 
