@@ -40,8 +40,8 @@ class CommentListener: JobService() {
             )
 
             bookmarks.map {
-                // for the love of god, make this abomination of a line prettier before submission
-                val cursor = contentResolver.query(CommentRecord.buildImageCommentsUri(CommentRecord.getIdThingy(it)), CommentRecord.COLUMNS, null, null, null)
+                val uri = CommentRecord.buildImageCommentsUri(CommentRecord.getIdThingy(it))
+                val cursor = contentResolver.query(uri, CommentRecord.COLUMNS, null, null, null)
                 Triple(it, Imgur.getComments(contentResolver, cursor, it), ImgurApi.getComments(it))
             }.filter {
                 val (_, oldComments, newComments) = it
