@@ -1,5 +1,6 @@
 package com.imgurisnotimgur.api
 
+import android.content.Context
 import android.util.Base64
 import com.google.gson.Gson
 import com.imgurisnotimgur.SecretUtils
@@ -8,7 +9,6 @@ import okhttp3.MultipartBody
 import okhttp3.Request
 import okhttp3.ResponseBody
 import org.json.JSONObject
-import java.io.File
 import java.security.InvalidParameterException
 
 class ImgurApi {
@@ -231,6 +231,18 @@ class ImgurApi {
                     }
 
             return galleryImages.toTypedArray()
+        }
+
+        fun getMetadataFromId(id: String, context: Context): Image {
+            val url = "https://api.imgur.com/3/image/$id"
+            val request = HttpUtils.createRequest(url, mapOf("Authorization" to "Client-ID $clientId"))
+            val response = HttpUtils.sendRequest(request)
+            val body = response.body()!!
+            val jsonResponse = body.string()
+            val gson = Gson()
+            val imgurJson = getJsonData(jsonResponse)
+            val imgurImage = gson.fromJson(imgurJson, Image::class.java)
+            return Image(imgurImage.id, imgurImage.title, SecretUtils.getSecrets(context).second.accountUsername, imgurImage.points, imgurImage.createdAt, imgurImage.albumId, imgurImage.isAlbum)
         }
     }
 }
